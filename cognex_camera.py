@@ -1,0 +1,251 @@
+# An example of implemting a Cognex camera interface using the WebAPI in Python.
+# pip install websockets
+import asyncio
+import json
+import websockets
+import logging
+
+class CogSocket:
+    def __init__(self, websocket_uri, root=None):
+        self.uri = websocket_uri
+        self.root = root
+        self.websocket = None
+        self.request_id = 0
+        self.pending_requests = {}
+        self.listeners = {}
+        self.space = None
+        self.log = None
+        self.onopen = None
+        self.onerror = None
+        self.onclose = None
+
+    async def connect(self):
+        try:
+            self.websocket = await websockets.connect(self.uri)
+            if self.onopen:
+                self.onopen()
+            asyncio.create_task(self._listen())
+        except Exception as e:
+            if self.onerror:
+                self.onerror()
+            raise
+
+    async def _listen(self):
+        try:
+            async for message in self.websocket:
+                await self._handle_message(message)
+        except websockets.exceptions.ConnectionClosed:
+            if self.onclose:
+                self.onclose()
+
+    async def _handle_message(self, message):
+        if self.log:
+            self.log(f"Received: {message}")
+        try:
+            msg = json.loads(message)
+            msg_type = msg.get('$type')
+            path = msg.get('path')
+            if msg_type == 'resp':
+                req_id = msg.get('id')
+                pending = self.pending_requests.get(req_id)
+                if pending:
+                    future = pending.get('future')
+                    if future:
+                        if 'error' in msg:
+                            error = Exception(msg.get('body', str(msg['error'])))
+                            future.set_exception(error)
+                        else:
+                            future.set_result(msg.get('body'))
+                    del self.pending_requests[req_id]
+            elif msg_type == 'event':
+                listeners = self.listeners.get(path, [])
+                body = msg.get('body')
+                if body is not None:
+                    args = body if isinstance(body, list) else [body]
+                else:
+                    args = []
+                for listener in listeners:
+                    if asyncio.iscoroutinefunction(listener):
+                        await listener(*args)
+                    else:
+                        listener(*args)
+        except json.JSONDecodeError:
+            pass
+
+    def _next_request_id(self):
+        self.request_id = (self.request_id + 1) % 0x7FFFFFFF
+        return self.request_id
+
+    async def _send_request(self, type_, path, body=None):
+        req_id = self._next_request_id()
+        future = asyncio.Future()
+        self.pending_requests[req_id] = {'future': future}
+        msg = {
+            '$type': type_,
+            'id': req_id,
+            'path': path
+        }
+        if body is not None:
+            msg['body'] = body
+        json_msg = json.dumps(msg, indent=self.space)
+        if self.log:
+            self.log(f"Send: {json_msg}")
+        await self.websocket.send(json_msg)
+        return await future
+
+    async def get(self, path):
+        return await self._send_request('get', path)
+
+    async def put(self, path, data):
+        return await self._send_request('put', path, data)
+
+    async def post(self, path, data):
+        return await self._send_request('post', path, data)
+
+    async def add_listener(self, path, listener):
+        if path not in self.listeners:
+            self.listeners[path] = []
+            await self._send_request('listen', path)
+        self.listeners[path].append(listener)
+
+    async def remove_listener(self, path, listener=None):
+        if path in self.listeners:
+            if listener:
+                try:
+                    self.listeners[path].remove(listener)
+                except ValueError:
+                    pass
+                if not self.listeners[path]:
+                    del self.listeners[path]
+                    await self._send_request('unlisten', path)
+            else:
+                del self.listeners[path]
+                await self._send_request('unlisten', path)
+
+    async def close(self):
+        if self.websocket:
+            await self.websocket.close()
+            self.websocket = None
+
+class CognexCamera:
+    def __init__(self, ip, port=80, username='admin', password=''):
+        self.ip = ip
+        self.port = port
+        self.username = username
+        self.password = password
+        self.cogsock = None
+        self.session_id = None
+        self.keep_alive_task = None
+        self.root = 'cam0/hmi'
+        self.cells = 'A0:Z100'
+
+    async def connect_async(self):
+        uri = f"ws://{self.ip}:{self.port}/ws"
+        self.cogsock = CogSocket(uri)
+        #self.cogsock.log = lambda msg: print(f"[CogSocket] {msg}")
+        await self.cogsock.connect()
+        # open session
+        session_info = {'cellNames': [self.cells]}
+        self.session_id = await self.cogsock.post(f"{self.root}/openSession", session_info)
+        print(f"Session: {self.session_id}")
+        # login
+        ok = await self.cogsock.post(f"{self.session_id}/login", [self.username, self.password, False])
+        if isinstance(ok, dict) and ok.get('error'):
+            raise Exception("Login failed")
+        print("Login successful")
+        # add listeners
+        await self.cogsock.add_listener(f"{self.root}/stateChanged", self._on_state_changed)
+        await self.cogsock.add_listener(f"{self.session_id}/resultChanged", self._on_result_changed)
+        # ready
+        await self.cogsock.post(f"{self.session_id}/ready", "")
+        # start keep alive
+        self.keep_alive_task = asyncio.create_task(self._keep_alive())
+
+    async def _keep_alive(self):
+        while True:
+            await asyncio.sleep(15)
+            if self.session_id:
+                await self.cogsock.post(f"{self.session_id}/keepAlive", "")
+                await self.cogsock.post(f"{self.session_id}/ready", "")
+
+    async def _on_state_changed(self, *args):
+        #print(f"State changed: {args}")
+        print(f"State changed")
+
+    async def _on_result_changed(self, *args):
+        #print(f"Result changed: {args}")
+        print(f"Result changed")
+
+    async def disconnect_async(self):
+        try:
+            # Stop keep-alive first
+            if self.keep_alive_task:
+                self.keep_alive_task.cancel()
+                try:
+                    await self.keep_alive_task
+                except asyncio.CancelledError:
+                    pass
+
+            # Dispose session on Cognex server (IMPORTANT)
+            if self.cogsock and self.session_id:
+                try:
+                    print(f"Disposing session: {self.session_id}")
+                    await self.cogsock.post(f"{self.session_id}/dispose", None)
+                except Exception as e:
+                    print(f"Dispose failed: {e}")
+
+            # Close socket
+            if self.cogsock:
+                await self.cogsock.close()
+
+        finally:
+            self.keep_alive_task = None
+            self.session_id = None
+
+    # Camera functions
+    async def manual_trigger_async(self):
+        await self.cogsock.post(f"{self.session_id}/manualTrigger", "")
+
+    async def live_mode_async(self):
+        state = await self.cogsock.get(f"{self.root}/state")
+        current_live = state.get('liveMode', False)
+        new_live = not current_live
+        await self.cogsock.put(f"{self.root}/liveMode", new_live)
+
+    async def online_offline_async(self):
+        resp = await self.cogsock.get(f"{self.session_id}/softOnline")
+        current_online = resp if isinstance(resp, bool) else False
+        new_online = not current_online
+        await self.cogsock.put(f"{self.session_id}/softOnline", new_online)
+
+    async def query_check_cell_results_async(self, cell):
+        resp = await self.cogsock.post(f"{self.session_id}/queryCellResults", [[cell]])
+        return json.dumps(resp)
+
+    async def get_cell_expressions_async(self, cell):
+        resp = await self.cogsock.post(f"{self.session_id}/getCellExpressions", [cell, True])
+        return json.dumps(resp)
+
+    async def set_cell_expression_async(self, cell, expr):
+        await self.cogsock.post(f"{self.session_id}/setCellExpression", [cell, expr])
+
+    async def set_cell_value_async(self, cell, value):
+        await self.cogsock.post(f"{self.session_id}/setCellValue", [cell, value])
+
+    async def list_camera_files_async(self):
+        resp = await self.cogsock.post(f"{self.session_id}/listFiles", [])
+        return json.dumps(resp)
+
+    async def get_info_async(self):
+        resp = await self.cogsock.get(f"{self.root}/info")
+        return json.dumps(resp)
+
+    async def find_state_async(self):
+        resp = await self.cogsock.get(f"{self.root}/state")
+        return json.dumps(resp)
+
+    async def go_online_async(self):
+        await self.cogsock.put(f"{self.session_id}/softOnline", True)
+
+    async def go_offline_async(self):
+        await self.cogsock.put(f"{self.session_id}/softOnline", False)
