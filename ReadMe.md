@@ -13,6 +13,8 @@ This API example in Python is not supported by Cognex.
 
 Install required packages:
 - pip install websockets
+  
+## Example
 
 ```bash
 import asyncio
