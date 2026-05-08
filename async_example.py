@@ -60,12 +60,12 @@ async def main():
         print(f"Cell B16 Expression: {expr}")
 
         # Enable/disable live mode
-        print("Going live...")
-        await camera.live_mode_async(True)
-        print("Live mode enabled.")
-        print("Going !live...")
-        await camera.live_mode_async(False)
-        print("Live mode disabled.")
+        # print("Going live...")
+        # await camera.live_mode_async(True)
+        # print("Live mode enabled.")
+        # print("Going !live...")
+        # await camera.live_mode_async(False)
+        # print("Live mode disabled.")
         
         # Go offline
         print("Going offline...")
