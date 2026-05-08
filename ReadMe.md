@@ -73,8 +73,19 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 ```
-
-## Supported methods
+## Camera Properties
+- Required to create a new camera
+  - port
+  - username
+  - password
+- Get or set after a camera is created
+  - cogsock
+  - session_id
+  - keep-alive_task
+  - root
+  - cells
+  
+## Camera Methods
 - connect_async()
 - manual_trigger_async()
 - get_info_async()
