@@ -2,7 +2,7 @@
 
 This is an unofficial independent project and is not affiliated with or supported by Cognex Corporation.
 
-TODO: getSessionIDs, jobValidationState, runJobValidation, systemValidationFlag, cancelJobValidation
+TODO: ready, getSessionIDs, jobValidationState, runJobValidation, systemValidationFlag, cancelJobValidation
 
 ## Overview
 
