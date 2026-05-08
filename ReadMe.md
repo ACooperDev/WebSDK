@@ -10,6 +10,7 @@ TODO: ready, getSessionIDs, jobValidationState, runJobValidation, systemValidati
   - `CogSocket`
   - `CognexCamera`
 - `async_example.py` is an example implementation of `cognex_camera.py`
+- `In-Sight HMI API.pdf` is the ISVS REST API documentation
 
 ## Requirements
 
