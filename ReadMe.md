@@ -23,7 +23,7 @@ from cognex_camera import CognexCamera
 
 async def main():
     # Define a camera
-    camera = CognexCamera(ip='192.168.0.5', port=80, username='admin', password='')
+    camera = CognexCamera(ip='192.168.0.5')
 
     # Connect to the camera
     await camera.connect_async()
@@ -46,7 +46,7 @@ from cognex_camera import CognexCamera
 
 async def main():
     # Define a camera
-    camera = CognexCamera(ip='192.168.0.5', port=80, username='admin', password='')
+    camera = CognexCamera(ip='192.168.0.5')
 
     # Connect to the camera
 
