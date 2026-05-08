@@ -1,5 +1,7 @@
 # Cognex WebSDK In Python (Unofficial)
 
+TODO: getSessionIDs, jobValidationState, runJobValidation, systemValidationFlag, cancelJobValidation
+
 This is an unofficial independent project and is not affiliated with or supported by Cognex Corporation.
 
 ## Overview
