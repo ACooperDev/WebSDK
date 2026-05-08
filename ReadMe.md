@@ -100,3 +100,5 @@ if __name__ == "__main__":
 - find_state_async()
 - go_online_async()
 - go_offline_async()
+- get_jobinfo_async()
+- save_job_async(string)
