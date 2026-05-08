@@ -1,5 +1,4 @@
 # An example of using the CognexCamera class with async/await in Python.
-# pip install websockets
 import asyncio
 import json
 from cognex_camera import CognexCamera
