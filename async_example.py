@@ -93,6 +93,11 @@ async def main():
         # print("Saving current job...")
         # await camera.save_job_async("MyJob5.jobx")
         # print("Job has been saved.")
+
+        # Load job
+        # print("Loading job...")
+        # await camera.load_job_async("MyJob2.jobx")
+        # print("Job has been loaded.")
         
     finally:
         # Disconnect
