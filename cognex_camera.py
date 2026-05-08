@@ -1,5 +1,4 @@
 # An example of implemting a Cognex camera interface using the WebAPI in Python.
-# pip install websockets
 import asyncio
 import json
 import websockets
