@@ -14,7 +14,7 @@ This is an unofficial independent project and is not affiliated with or supporte
 Install required packages:
 - pip install websockets
   
-## Starter Example
+## Getting Started
 
 ```bash
 import asyncio
