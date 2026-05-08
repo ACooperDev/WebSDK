@@ -1,6 +1,6 @@
 # Cognex WebSDK In Python (Unofficial)
 
-This API example in Python is not supported by Cognex.
+This is an unofficial independent project and is not affiliated with or supported by Cognex Corporation.
 
 ## Overview
 
