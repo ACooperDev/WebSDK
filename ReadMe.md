@@ -102,3 +102,4 @@ if __name__ == "__main__":
 - go_offline_async()
 - get_jobinfo_async()
 - save_job_async(string)
+- load_job_async(string)
