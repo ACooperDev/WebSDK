@@ -59,10 +59,13 @@ async def main():
         expr = await camera.get_cell_expressions_async('B16')
         print(f"Cell B16 Expression: {expr}")
 
-        # Toggle live mode
-        # print("Toggling live mode...")
-        # await camera.live_mode_async()
-        # print("Live mode toggled.")
+        # Enable/disable live mode
+        print("Going live...")
+        await camera.live_mode_async(True)
+        print("Live mode enabled.")
+        print("Going !live...")
+        await camera.live_mode_async(False)
+        print("Live mode disabled.")
         
         # Go offline
         print("Going offline...")
