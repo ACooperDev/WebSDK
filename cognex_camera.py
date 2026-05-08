@@ -148,17 +148,17 @@ class CognexCamera:
         session_info = {'cellNames': [self.cells]}
         self.session_id = await self.cogsock.post(f"{self.root}/openSession", session_info)
         print(f"Session: {self.session_id}")
-        # login
+        # Login
         ok = await self.cogsock.post(f"{self.session_id}/login", [self.username, self.password, False])
         if isinstance(ok, dict) and ok.get('error'):
             raise Exception("Login failed")
         print("Login successful")
-        # add listeners
+        # Add listeners
         await self.cogsock.add_listener(f"{self.root}/stateChanged", self._on_state_changed)
         await self.cogsock.add_listener(f"{self.session_id}/resultChanged", self._on_result_changed)
         # ready
         await self.cogsock.post(f"{self.session_id}/ready", "")
-        # start keep alive
+        # Start keep alive
         self.keep_alive_task = asyncio.create_task(self._keep_alive())
 
     async def _keep_alive(self):
@@ -246,3 +246,10 @@ class CognexCamera:
 
     async def go_offline_async(self):
         await self.cogsock.put(f"{self.session_id}/softOnline", False)
+
+    async def get_jobinfo_async(self):
+        resp = await self.cogsock.get(f"{self.root}/job")
+        return json.dumps(resp)
+    
+    async def save_job_async(self, job_name):
+        await self.cogsock.post(f"{self.session_id}/saveJob", job_name)
