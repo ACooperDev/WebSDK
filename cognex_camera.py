@@ -255,3 +255,6 @@ class CognexCamera:
 
     async def load_job_async(self, job_name):
         await self.cogsock.post(f"{self.session_id}/loadJob", job_name)
+
+    async def ready_async(self):
+        await self.cogsock.post(f"{self.session_id}/ready", "")
