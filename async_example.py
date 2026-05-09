@@ -102,6 +102,11 @@ async def main():
         # print("Sending ready...")
         # await camera.ready_async()
         # print("Ready sent.")
+
+        # Get session IDs        
+        # print("Getting session IDs...")
+        # sessionIDs = await camera.session_IDs_async() 
+        # print(f"Session IDs: {sessionIDs}")
         
     finally:
         # Disconnect
