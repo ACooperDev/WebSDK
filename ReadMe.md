@@ -118,3 +118,11 @@ except Exception as e:
 - load_job_async(string)
 - ready_async()
 - session_IDs_async()
+
+## Camera Events
+- on_state_changed
+- on_result_changed
+- on_liveMode_changed
+- on_job_changed
+- on_editorAttached
+  
