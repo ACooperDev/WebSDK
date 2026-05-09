@@ -258,3 +258,7 @@ class CognexCamera:
 
     async def ready_async(self):
         await self.cogsock.post(f"{self.session_id}/ready", "")
+
+    async def session_IDs_async(self):
+        resp = await self.cogsock.post(f"{self.session_id}/getSessionIDs", "")
+        return json.dumps(resp)
