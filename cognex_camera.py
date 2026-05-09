@@ -138,6 +138,14 @@ class CognexCamera:
         self.root = 'cam0/hmi'
         self.cells = 'A0:Z100'
 
+        # Event subscriber lists
+        self.on_state_changed = []
+        self.on_result_changed = []
+        self.on_liveMode_changed = []
+        self.on_job_changed = []
+        self.on_editorAttached = []
+        self.on_jobLoading_changed = []
+        
     async def connect_async(self):
         uri = f"ws://{self.ip}:{self.port}/ws"
         self.cogsock = CogSocket(uri)
@@ -155,6 +163,10 @@ class CognexCamera:
         # Add listeners
         await self.cogsock.add_listener(f"{self.root}/stateChanged", self._on_state_changed)
         await self.cogsock.add_listener(f"{self.session_id}/resultChanged", self._on_result_changed)
+        await self.cogsock.add_listener(f"{self.root}/liveModeChanged", self._on_liveMode_changed)
+        await self.cogsock.add_listener(f"{self.root}/jobChanged", self._on_job_changed)
+        await self.cogsock.add_listener(f"{self.root}/editorAttachedChanged", self._on_editorAttached)
+        await self.cogsock.add_listener(f"{self.root}/jobLoadingChanged", self._on_jobLoading_changed)
         # ready
         await self.cogsock.post(f"{self.session_id}/ready", "")
         # Start keep alive
@@ -168,12 +180,46 @@ class CognexCamera:
                 await self.cogsock.post(f"{self.session_id}/ready", "")
 
     async def _on_state_changed(self, *args):
-        #print(f"State changed: {args}")
-        print(f"State changed")
+        #print("State changed")
+
+        # ONLY callbacks
+        for cb in self.on_state_changed:
+            await cb(*args)
 
     async def _on_result_changed(self, *args):
-        #print(f"Result changed: {args}")
-        print(f"Result changed")
+        #print("Result changed")
+
+        # ONLY callbacks
+        for cb in self.on_result_changed:
+            await cb(*args)
+            
+    async def _on_liveMode_changed(self, *args):
+        #print("Live mode changed")
+
+        # ONLY callbacks
+        for cb in self.on_liveMode_changed:
+            await cb(*args)
+
+    async def _on_job_changed(self, *args):
+        #print("Job changed")
+
+        # ONLY callbacks
+        for cb in self.on_job_changed:
+            await cb(*args)
+
+    async def _on_editorAttached(self, *args):
+        #print("Editor attached")
+
+        # ONLY callbacks
+        for cb in self.on_editorAttached:
+            await cb(*args)
+
+    async def _on_jobLoading_changed(self, *args):
+        #print("Job loading changed")
+
+        # ONLY callbacks
+        for cb in self.on_jobLoading_changed:
+            await cb(*args)
 
     async def disconnect_async(self):
         try:
