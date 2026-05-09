@@ -97,6 +97,11 @@ async def main():
         # print("Loading job...")
         # await camera.load_job_async("MyJob2.jobx")
         # print("Job has been loaded.")
+
+        # Send ready
+        # print("Sending ready...")
+        # await camera.ready_async()
+        # print("Ready sent.")
         
     finally:
         # Disconnect
