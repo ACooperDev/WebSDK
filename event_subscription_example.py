@@ -2,6 +2,7 @@
 import asyncio
 import json
 from cognex_camera import CognexCamera
+
 class CameraState:
     def __init__(self):
         self.state_changed = False
