@@ -76,6 +76,16 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 ```
+## Recommendation
+```bash
+# Add Try/Except to all method calls.
+# Example
+try:
+    await camera.someMethod()
+except Exception as e:
+    print(f"Error occurred while running xMethod: {e}")
+```
+
 ## Camera Properties
 - Required to create a new camera
   - port
