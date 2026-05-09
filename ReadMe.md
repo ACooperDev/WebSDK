@@ -9,7 +9,8 @@ TODO: jobValidationState, runJobValidation, systemValidationFlag, cancelJobValid
 - `cognex_camera.py` defines two classes:
   - `CogSocket`
   - `CognexCamera`
-- `async_example.py` is an example implementation of `cognex_camera.py`
+- `async_example.py` is an example implementation of `cognex_camera.py` method calls
+- `event_subscription_example.py` is an example implementation of `cognex_camera.py` event subscription
 - `In-Sight HMI API.pdf` is the ISVS REST API documentation
 
 ## Requirements
