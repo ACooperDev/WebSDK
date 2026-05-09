@@ -2,7 +2,7 @@
 
 This is an independent project not affiliated with, endorsed by, or supported by Cognex Corporation.
 
-TODO: ready, getSessionIDs, jobValidationState, runJobValidation, systemValidationFlag, cancelJobValidation, event subscription
+TODO: getSessionIDs, jobValidationState, runJobValidation, systemValidationFlag, cancelJobValidation, event subscription
 
 ## Overview
 
@@ -106,3 +106,4 @@ if __name__ == "__main__":
 - get_jobinfo_async()
 - save_job_async(string)
 - load_job_async(string)
+- ready_async()
