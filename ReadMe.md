@@ -88,6 +88,7 @@ except Exception as e:
 
 ## Camera Properties
 - Required to create a new camera
+  - ip
   - port
   - username
   - password
