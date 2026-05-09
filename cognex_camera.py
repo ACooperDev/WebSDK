@@ -185,7 +185,7 @@ class CognexCamera:
                 except asyncio.CancelledError:
                     pass
 
-            # Dispose session on Cognex server (IMPORTANT)
+            # Dispose session on Cognex server
             if self.cogsock and self.session_id:
                 try:
                     print(f"Disposing session: {self.session_id}")
