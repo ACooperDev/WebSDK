@@ -91,7 +91,7 @@ except Exception as e:
 
 ## Camera Properties
 ```bash
-camera = CognexCamera()
+camera = CognexCamera(ip, optionalProperties)
 ````
 - Required to create a new camera
   - ip (string)
@@ -115,6 +115,10 @@ camera = CognexCamera()
     - Defaulted 'A0:Z100' 
   
 ## Camera Methods
+```bash
+camera = CognexCamera()
+await camera.selectedMethod
+````
 - connect_async()
   - Connects to the camera and creates a session.   
 - disconnect_async()
@@ -143,6 +147,10 @@ camera = CognexCamera()
   - Gets all camera sessions by ID. 
 
 ## Camera Events
+```bash
+camera = CognexCamera()
+camera.selectedEvent.append()
+````
 - on_state_changed
   - Fired when the camera state changes. 
 - on_result_changed
