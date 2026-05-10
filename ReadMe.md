@@ -131,6 +131,7 @@ except Exception as e:
 - on_editorAttached
 - on_jobLoading_changed
 - on_settings_changed
+- jobLoadFailed
 
 ## Example Event Subscription
 ```bash
