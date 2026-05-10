@@ -2,7 +2,7 @@
 
 This is an independent project not affiliated with, endorsed by, or supported by Cognex Corporation.
 
-TODO: jobValidationState, runJobValidation, systemValidationFlag, cancelJobValidation, event subscription
+TODO: keepalivetimeout, jobValidationState, runJobValidation, systemValidationFlag, cancelJobValidation, event subscription
 
 ## Overview
 
@@ -101,10 +101,15 @@ except Exception as e:
     - Camera password. Defaulted: "" 
 - Get or set after a camera is created
   - cogsock
+    - A new CogSocket("ws://ip:port/ws") 
   - session_id
+    - The unique session represnting a connection to a cmaera.  Example: cam0/hmi/hs/~152028e7 
   - keep-alive_task
+    - A request to keep the current session alive and availble.  Default sessions are only kept alive for 30 seconds.  Limits [3, 30000]
   - root
+    - Defaulted: 'cam0/hmi'
   - cells
+    - Defaulted 'A0:Z100' 
   
 ## Camera Methods
 - connect_async()
@@ -116,10 +121,11 @@ except Exception as e:
 - live_mode_async(bool)
   - Enables or disables live mode.
 - online_offline_async()
-- query_check_cell_results_async('yourCell')
-- get_cell_expressions_async('yourCell')
-- set_cell_expression_async('yourCell', 'yourFunction')
-- set_cell_value_async('yourCell', yourValue)
+  - Toggles to the opposite online state. 
+- query_check_cell_results_async(cell: str)
+- get_cell_expressions_async(cell: str)
+- set_cell_expression_async(cell: str, function: str)
+- set_cell_value_async(cell: str, value)
 - list_camera_files_async()
 - get_info_async()
 - find_state_async()
@@ -129,17 +135,27 @@ except Exception as e:
 - save_job_async(string)
 - load_job_async(string)
 - ready_async()
+  - Updates the result for the session when one is available from a camera.  A on_result_changed event is raised when the result has changed.
 - session_IDs_async()
+  - Gets all camera sessions by ID. 
 
 ## Camera Events
 - on_state_changed
+  - Fired when the camera state changes. 
 - on_result_changed
+  - Fired when the session is ready and there is a new result.
 - on_liveMode_changed
+  - Fired when the cameras live mode is toggled.
 - on_job_changed
+  - Fired after any of the job values have changed in cam0/hmi/job. 
 - on_editorAttached
+  - Fired when ISVS editor has connected to a camera. 
 - on_jobLoading_changed
+  - Fired after the job loading flag has changed. 
 - on_settings_changed
+  - Fired after HMI value settings have changed. 
 - jobLoadFailed
+  - Fired after a job load has failed. 
 
 ## Example Event Subscription
 ```bash
