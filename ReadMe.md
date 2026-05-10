@@ -168,10 +168,10 @@ camera.selectedEvent.append(yourCustomMethod)
   - Fired after the job loading flag has changed. 
 - on_settings_changed
   - Fired after HMI value settings have changed. 
-- _on_jobLoadFailed_changed
+- on_jobLoadFailed_changed
   - Fired after a job load has failed.
-- _on_jobValidationDone_changed
-- _on_sessionDisposed_changed
+- on_jobValidationDone_changed
+- on_sessionDisposed_changed
 
 ## Example Event Subscription
 ```bash
