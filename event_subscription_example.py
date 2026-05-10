@@ -103,7 +103,6 @@ async def sessionDisposed_handler(*args):
 async def main():
     # Create camera
     camera = CognexCamera(ip='192.168.0.74')
-    await camera.ready_async()
 
     # Subscribe to events
     camera.on_state_changed.append(state_changed_handler)
