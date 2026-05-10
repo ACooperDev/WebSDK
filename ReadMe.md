@@ -56,8 +56,6 @@ async def main():
 
     # Connect to the camera
 
-    # Trigger the camera
-
     # Option 1: Wait for response.  Application will not continue until the response has arrived or times out.
     info = await camera.get_info_async()
     print(f"Camera Info: {info}")
