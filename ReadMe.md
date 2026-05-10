@@ -2,7 +2,7 @@
 
 This is an independent project not affiliated with, endorsed by, or supported by Cognex Corporation.
 
-TODO: keepalivetimeout, jobValidationState, runJobValidation, systemValidationFlag, cancelJobValidation, event subscription
+TODO: keepalivetimeout, jobValidationState, runJobValidation, systemValidationFlag, cancelJobValidation
 
 ## Overview
 
@@ -168,8 +168,10 @@ camera.selectedEvent.append(yourCustomMethod)
   - Fired after the job loading flag has changed. 
 - on_settings_changed
   - Fired after HMI value settings have changed. 
-- jobLoadFailed
-  - Fired after a job load has failed. 
+- _on_jobLoadFailed_changed
+  - Fired after a job load has failed.
+- _on_jobValidationDone_changed
+- _on_sessionDisposed_changed
 
 ## Example Event Subscription
 ```bash
