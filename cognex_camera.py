@@ -137,7 +137,7 @@ class CognexCamera:
         self.keep_alive_task = None
         self.root = 'cam0/hmi'
         self.cells = 'A0:Z100'
-
+        
         # Event subscriber lists
         self.on_state_changed = []
         self.on_result_changed = []
@@ -145,7 +145,11 @@ class CognexCamera:
         self.on_job_changed = []
         self.on_editorAttached = []
         self.on_jobLoading_changed = []
-        
+        self.on_settings_changed = []
+        self.on_jobLoadFailed = []
+        self.on_jobValidationDone = []
+        self.on_sessionDisposed = []
+
     async def connect_async(self):
         uri = f"ws://{self.ip}:{self.port}/ws"
         self.cogsock = CogSocket(uri)
@@ -167,6 +171,10 @@ class CognexCamera:
         await self.cogsock.add_listener(f"{self.root}/jobChanged", self._on_job_changed)
         await self.cogsock.add_listener(f"{self.root}/editorAttachedChanged", self._on_editorAttached)
         await self.cogsock.add_listener(f"{self.root}/jobLoadingChanged", self._on_jobLoading_changed)
+        await self.cogsock.add_listener(f"{self.root}/settingsChanged", self._on_settings_changed)
+        await self.cogsock.add_listener(f"{self.root}/jobLoadFailed", self._on_jobLoadFailed_changed)
+        await self.cogsock.add_listener(f"{self.root}/jobValidationDone", self._on_jobValidationDone_changed)
+        await self.cogsock.add_listener(f"{self.root}/sessionDisposed", self._on_sessionDisposed_changed)
         # ready
         await self.cogsock.post(f"{self.session_id}/ready", "")
         # Start keep alive
@@ -219,6 +227,34 @@ class CognexCamera:
 
         # ONLY callbacks
         for cb in self.on_jobLoading_changed:
+            await cb(*args)
+            
+    async def _on_settings_changed(self, *args):
+        # print("Settings changed")
+
+        # ONLY callbacks
+        for cb in self.on_settings_changed:
+            await cb(*args)           
+            
+    async def _on_jobLoadFailed_changed(self, *args):
+        # print("Job load failed")
+
+        # ONLY callbacks
+        for cb in self.on_jobLoadFailed:
+            await cb(*args)
+  
+    async def _on_jobValidationDone_changed(self, *args):
+        # print("Job validation done")
+
+        # ONLY callbacks
+        for cb in self.on_jobValidationDone:
+            await cb(*args)          
+            
+    async def _on_sessionDisposed_changed(self, *args):
+        # print("Session disposed")
+
+        # ONLY callbacks
+        for cb in self.on_sessionDisposed:
             await cb(*args)
 
     async def disconnect_async(self):
