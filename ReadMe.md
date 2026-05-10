@@ -127,4 +127,6 @@ except Exception as e:
 - on_liveMode_changed
 - on_job_changed
 - on_editorAttached
-  
+- on_jobLoading_changed
+- on_settings_changed
+- 
