@@ -118,6 +118,9 @@ camera = CognexCamera(ip, optionalProperties)
 ```bash
 camera = CognexCamera()
 await camera.selectedMethod
+# or
+value = await camera.selectedMethod
+
 ````
 - connect_async()
   - Connects to the camera and creates a session.   
@@ -149,7 +152,7 @@ await camera.selectedMethod
 ## Camera Events
 ```bash
 camera = CognexCamera()
-camera.selectedEvent.append()
+camera.selectedEvent.append(yourCustomMethod)
 ````
 - on_state_changed
   - Fired when the camera state changes. 
