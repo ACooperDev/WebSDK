@@ -6,7 +6,6 @@ from cognex_camera import CognexCamera
 async def main():
     # Create camera
     camera = CognexCamera(ip='192.168.0.5', port=80, username='admin', password='')
-    await camera.ready_async()
 
     try:
         # Connect
