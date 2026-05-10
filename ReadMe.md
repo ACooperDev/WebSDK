@@ -90,6 +90,9 @@ except Exception as e:
 ```
 
 ## Camera Properties
+```bash
+camera = CognexCamera()
+````
 - Required to create a new camera
   - ip (string)
      - Camera IP address
