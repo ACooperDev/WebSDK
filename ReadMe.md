@@ -116,7 +116,7 @@ camera = CognexCamera(ip, optionalProperties)
   
 ## Camera Methods
 ```bash
-camera = CognexCamera()
+camera = CognexCamera(ip)
 await camera.selectedMethod
 # or
 value = await camera.selectedMethod
@@ -151,7 +151,7 @@ value = await camera.selectedMethod
 
 ## Camera Events
 ```bash
-camera = CognexCamera()
+camera = CognexCamera(ip)
 camera.selectedEvent.append(yourCustomMethod)
 ````
 - on_state_changed
