@@ -161,9 +161,8 @@ async def main():
     camera.on_state_changed.append(state_changed_handler)
 
     try:
-        print("Connecting to camera...")
+        # Connect
         await camera.connect_async()
-        print("Connected.")
         await camera.ready_async()
 
         # Loop
@@ -174,6 +173,7 @@ async def main():
                     # print("MAIN saw settings change:", state.last_settings_result)
                     state.settings_changed = False
 
+            # Don't hammer your CPU, a sleep will not miss events, no matter how long it is.  All events will be queued and dequeued in order.
             await asyncio.sleep(0.1)
             
     finally:
