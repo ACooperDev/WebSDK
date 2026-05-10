@@ -91,10 +91,14 @@ except Exception as e:
 
 ## Camera Properties
 - Required to create a new camera
-  - ip
-  - port
-  - username
-  - password
+  - ip (string)
+     - Camera IP address
+  - port (int, optional)
+    - Camera web port. Defaulted: 80
+  - username (string, optional)
+    - Camera username. Defaulted: "admin"
+  - password (string, optional)
+    - Camera password. Defaulted: "" 
 - Get or set after a camera is created
   - cogsock
   - session_id
@@ -104,9 +108,13 @@ except Exception as e:
   
 ## Camera Methods
 - connect_async()
+  - Connects to the camera and creates a session.   
 - disconnect_async()
+  - Disconnects from the camera and closes the session. 
 - manual_trigger_async()
+  - Manually triggers an acquisition. 
 - live_mode_async(bool)
+  - Enables or disables live mode.
 - online_offline_async()
 - query_check_cell_results_async('yourCell')
 - get_cell_expressions_async('yourCell')
