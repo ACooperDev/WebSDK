@@ -85,7 +85,7 @@ async def main():
         # Current job info
         # print("Getting current job info...")
         # jobInfo = await camera.get_jobinfo_async()
-        #print(f"Job Info: {jobInfo}")
+        # print(f"Job Info: {jobInfo}")
         # jobInfoData = json.loads(jobInfo)
         # print(jobInfoData["name"])
 
