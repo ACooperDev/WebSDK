@@ -133,17 +133,29 @@ value = await camera.selectedMethod
 - online_offline_async()
   - Toggles to the opposite online state. 
 - query_check_cell_results_async(cell: str)
-- get_cell_expressions_async(cell: str)
+  - Query cells results
+- get_cell_expressions_async(cells: str)
+  - Gets cell expressions.
 - set_cell_expression_async(cell: str, function: str)
+  - Sets a cell expression.
 - set_cell_value_async(cell: str, value)
+  - Sets a cell value. 
 - list_camera_files_async()
+  - Lists all files on a camera.
 - get_info_async()
+  - Returns info not limited to cameara name, model, firmware, MAC, and serial.
 - find_state_async()
+  - Returns online state for discrete online, ffp online, live mode online, native online, online, and soft online. 
 - go_online_async()
+  - Sets soft online to true 
 - go_offline_async()
+  - Sets soft online to false.
 - get_jobinfo_async()
-- save_job_async(string)
-- load_job_async(string)
+  - Returns job information including job name.
+- save_job_async(job: str)
+  - Saves the current job with the chosen job name.
+- load_job_async(job: str)
+  - Loads a job by name.
 - ready_async()
   - Updates the result for the session when one is available from a camera.  A on_result_changed event is raised when the result has changed.
 - session_IDs_async()
@@ -171,7 +183,9 @@ camera.selectedEvent.append(yourCustomMethod)
 - on_jobLoadFailed_changed
   - Fired after a job load has failed.
 - on_jobValidationDone_changed
+  - Fired after job validation has completed. 
 - on_sessionDisposed_changed
+  - Fired when the HMI session has been disposed due to timeout or another disconnection type. 
 
 ## Example Event Subscription
 ```bash
