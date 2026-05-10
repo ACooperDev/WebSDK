@@ -31,6 +31,7 @@ async def main():
 
     # Connect to the camera
     await camera.connect_async()
+    await camera.ready_async()
 
     # Trigger the camera
     await camera.manual_trigger_async()
@@ -51,6 +52,7 @@ from cognex_camera import CognexCamera
 async def main():
     # Define a camera
     camera = CognexCamera(ip='192.168.0.5')
+    await camera.ready_async()
 
     # Connect to the camera
 
