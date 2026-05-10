@@ -56,7 +56,7 @@ async def main():
 
     # Trigger the camera
 
-    # Option 1: Wait for response.  Application will not continue until the response has arrived.
+    # Option 1: Wait for response.  Application will not continue until the response has arrived or times out.
     info = await camera.get_info_async()
     print(f"Camera Info: {info}")
 
@@ -129,4 +129,59 @@ except Exception as e:
 - on_editorAttached
 - on_jobLoading_changed
 - on_settings_changed
-- 
+
+## Example Event Subscription
+```bash
+import asyncio
+import json
+from cognex_camera import CognexCamera
+
+class CameraState:
+    def __init__(self):
+        self.state_changed = False
+        self.last_state = None
+
+state = CameraState()
+
+# Prevents race conditions
+state_lock = asyncio.Lock()
+
+# Event handler
+async def state_changed_handler(*args):
+    async with state_lock:
+        #print(f"STATE EVENT: {args}")
+        state.state_changed = True
+        state.last_state = args
+
+async def main():
+    # Create camera
+    camera = CognexCamera(ip='192.168.0.74')
+
+    # Subscribe to events
+    camera.on_state_changed.append(state_changed_handler)
+
+    try:
+        print("Connecting to camera...")
+        await camera.connect_async()
+        print("Connected.")
+        await camera.ready_async()
+
+        # Loop
+        while True:
+            async with state_lock:
+                
+                if state.settings_changed:
+                    # print("MAIN saw settings change:", state.last_settings_result)
+                    state.settings_changed = False
+
+            await asyncio.sleep(0.1)
+            
+    finally:
+        print("Disconnecting...")
+        await camera.disconnect_async()
+        print("Disconnected")
+
+if __name__ == "__main__":
+    asyncio.run(main())
+
+````
