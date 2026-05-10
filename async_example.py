@@ -11,6 +11,7 @@ async def main():
         # Connect
         print("Connecting to camera...")
         await camera.connect_async()
+        await camera.ready_async()
         print("Connected.")
 
         # Manual trigger
