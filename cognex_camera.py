@@ -3,6 +3,7 @@ import asyncio
 import json
 import websockets
 import logging
+import httpx
 
 class CogSocket:
     def __init__(self, websocket_uri, root=None):
