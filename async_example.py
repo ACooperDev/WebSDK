@@ -127,7 +127,14 @@ async def main():
         # Cancel job validation
         # print("Canceling job validation...")
         # await camera.cancel_job_validation_async()
-        # print("Job validation canceled.")    
+        # print("Job validation canceled.")
+
+        # Get/set keep alive interval
+        # print("Getting keep alive interval...")
+        # keepAliveInterval = await camera.get_keep_alive_interval_async()
+        # print(f"Keep Alive Interval: {keepAliveInterval} ms")
+        # print("Setting keep alive interval to 50 ms...")
+        # await camera.set_keep_alive_interval_async(50)
         
     finally:
         # Disconnect
