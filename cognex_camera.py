@@ -366,3 +366,23 @@ class CognexCamera:
     async def set_keep_alive_interval_async(self, interval_ms):
         resp = await self.cogsock.put(f"{self.root}/keepAliveTimeout", interval_ms)
         return json.dumps(resp)
+
+    async def load_image_async(self, filename, image_name=None):
+
+        # Read file as bytes
+        with open(filename, "rb") as f:
+            bytes_data = f.read()
+
+        # Build URL
+        url = f"http://{self.ip}:{self.port}/{self.session_id}/loadImage"
+
+        timeout = httpx.Timeout(30.0)
+
+        async with httpx.AsyncClient(timeout=timeout) as client:
+
+            # ByteArrayContent + Content-Type header
+            resp = await client.post(url, content=bytes_data, headers={"Content-Type": "image/bmp"})
+
+            # EnsureSuccessStatusCode()
+            resp.raise_for_status()
+
