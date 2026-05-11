@@ -12,6 +12,7 @@ This is an independent project not affiliated with, endorsed by, or supported by
 - `In-Sight HMI API.pdf` is the ISVS REST API documentation
 
 ## Requirements
+Python 3.14.0
 
 Install required packages:
 - pip install websockets
