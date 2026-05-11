@@ -2,7 +2,7 @@
 
 This is an independent project not affiliated with, endorsed by, or supported by Cognex Corporation.
 
-TODO: keepalivetimeout, load image
+TODO: load image
 
 ## Overview
 
@@ -165,7 +165,11 @@ value = await camera.selectedMethod
 - run_job_validation_async()
   - Runs the job validation set.
 - cancel_job_validation_async()
-  - Cancels a started job validation run. 
+  - Cancels a started job validation run.
+- get_keep_alive_interval_async()
+  - Returns the session timeout interval.
+- set_keep_alive_interval_async(value)
+  - Sets the session timeout interval.  
 
 ## Camera Events
 ```bash
