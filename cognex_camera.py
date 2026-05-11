@@ -358,3 +358,11 @@ class CognexCamera:
         
     async def cancel_job_validation_async(self):
         await self.cogsock.post(f"{self.session_id}/cancelJobValidation", "")
+
+    async def get_keep_alive_interval_async(self):
+        resp = await self.cogsock.get(f"{self.root}/keepAliveTimeout")
+        return json.dumps(resp)
+    
+    async def set_keep_alive_interval_async(self, interval_ms):
+        resp = await self.cogsock.put(f"{self.root}/keepAliveTimeout", interval_ms)
+        return json.dumps(resp)
