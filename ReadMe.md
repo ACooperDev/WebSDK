@@ -2,7 +2,7 @@
 
 This is an independent project not affiliated with, endorsed by, or supported by Cognex Corporation.
 
-TODO: keepalivetimeout, jobValidationState, runJobValidation, systemValidationFlag, cancelJobValidation
+TODO: keepalivetimeout
 
 ## Overview
 
@@ -157,7 +157,15 @@ value = await camera.selectedMethod
 - ready_async()
   - Updates the result for the session when one is available from a camera.  A on_result_changed event is raised when the result has changed.
 - session_IDs_async()
-  - Gets all camera sessions by ID. 
+  - Gets all camera sessions by ID.
+- job_validation_state_async()
+  - Returns the state of validation.
+- system_validation_flag_asyn()
+  - Gets the state of system validation.
+- run_job_validation_async()
+  - Runs the job validation set.
+- cancel_job_validation_async()
+  - Cancels a started job validation run. 
 
 ## Camera Events
 ```bash
@@ -183,7 +191,7 @@ camera.selectedEvent.append(yourCustomMethod)
 - on_jobValidationDone_changed
   - Fired after job validation has completed. 
 - on_sessionDisposed_changed
-  - Fired when the HMI session has been disposed due to timeout or another disconnection type. 
+  - Fired when the HMI session has been disposed due to timeout or another disconnection type.
 
 ## Example Event Subscription
 ```bash
