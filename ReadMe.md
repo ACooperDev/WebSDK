@@ -15,8 +15,12 @@ This is an independent project not affiliated with, endorsed by, or supported by
 Python 3.14.0
 
 Install required packages:
-- pip install websockets
-- pip install httpx
+```bash
+pip install websockets
+```
+```bash
+pip install httpx
+```
   
 ## Getting Started
 
