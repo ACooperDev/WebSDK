@@ -9,6 +9,10 @@ This is an independent project not affiliated with, endorsed by, or supported by
   - `CognexCamera`
 - `async_example.py` is an example implementation of `cognex_camera.py` method calls
 - `event_subscription_example.py` is an example implementation of `cognex_camera.py` event subscription
+- Extension Modules folder:
+  - `cognex_camera.cp314-win_amd64.pyd` Windows 11 Python 3.14
+  - `cognex_camera.cpython-311-x86_64-linux-gnu.so` Ubuntu Python 3.11
+  - `cognex_camera.cpython-314-darwin.so` MacOS Tahoe Python 3.14
 - `In-Sight HMI API.pdf` is the ISVS REST API documentation
 
 ## Requirements
