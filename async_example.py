@@ -108,6 +108,26 @@ async def main():
         # print("Getting session IDs...")
         # sessionIDs = await camera.session_IDs_async() 
         # print(f"Session IDs: {sessionIDs}")
+
+        # Get job validation state
+        # print("Getting job validation state...")  
+        # jobValidationState = await camera.job_validation_state_async()
+        # print(f"Job Validation State: {jobValidationState}")
+        
+        # Get system validation flag        
+        # print("Getting system validation flag...")  
+        # systemValidationFlag = await camera.system_validation_flag_async()
+        # print(f"System Validation Flag: {systemValidationFlag}")    
+        
+        # Run job validation
+        # print("Running job validation...")
+        # await camera.run_job_validation_async()
+        # print("Job validation run.")
+        
+        # Cancel job validation
+        # print("Canceling job validation...")
+        # await camera.cancel_job_validation_async()
+        # print("Job validation canceled.")    
         
     finally:
         # Disconnect
