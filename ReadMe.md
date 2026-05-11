@@ -15,6 +15,7 @@ This is an independent project not affiliated with, endorsed by, or supported by
 
 Install required packages:
 - pip install websockets
+- pip install httpx
   
 ## Getting Started
 
