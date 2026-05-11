@@ -2,8 +2,6 @@
 
 This is an independent project not affiliated with, endorsed by, or supported by Cognex Corporation.
 
-TODO: load image
-
 ## Overview
 
 - `cognex_camera.py` defines two classes:
@@ -169,7 +167,9 @@ value = await camera.selectedMethod
 - get_keep_alive_interval_async()
   - Returns the session timeout interval.
 - set_keep_alive_interval_async(value)
-  - Sets the session timeout interval.  
+  - Sets the session timeout interval.
+- load_image_async(imagePath: str, imageName: str)
+  - Loads an image from disk to the camera. 
 
 ## Camera Events
 ```bash
