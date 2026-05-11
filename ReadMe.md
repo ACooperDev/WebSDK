@@ -2,7 +2,7 @@
 
 This is an independent project not affiliated with, endorsed by, or supported by Cognex Corporation.
 
-TODO: keepalivetimeout
+TODO: keepalivetimeout, load image
 
 ## Overview
 
