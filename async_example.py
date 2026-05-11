@@ -135,6 +135,12 @@ async def main():
         # print(f"Keep Alive Interval: {keepAliveInterval} ms")
         # print("Setting keep alive interval to 50 ms...")
         # await camera.set_keep_alive_interval_async(50)
+
+        # Load image
+        # print("Loading image...")
+        # await camera.load_image_async(r"C:\test\myImage.bmp", "myImage")
+        # print("Image loaded.")
+    
         
     finally:
         # Disconnect
