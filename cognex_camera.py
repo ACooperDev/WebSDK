@@ -344,3 +344,17 @@ class CognexCamera:
     async def session_IDs_async(self):
         resp = await self.cogsock.post(f"{self.session_id}/getSessionIDs", "")
         return json.dumps(resp)
+
+    async def job_validation_state_async(self):
+        resp = await self.cogsock.get(f"{self.session_id}/jobValidationState")
+        return json.dumps(resp)
+    
+    async def system_validation_flag_async(self):
+        resp = await self.cogsock.get(f"{self.session_id}/systemValidationFlag")
+        return json.dumps(resp)
+    
+    async def run_job_validation_async(self):
+        await self.cogsock.post(f"{self.session_id}/runJobValidation", "")
+        
+    async def cancel_job_validation_async(self):
+        await self.cogsock.post(f"{self.session_id}/cancelJobValidation", "")
