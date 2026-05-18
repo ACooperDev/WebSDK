@@ -119,16 +119,17 @@ async def main():
     try:
         # Connect
         print("Connecting to camera...")
-        await camera.connect_async()
+        await camera.connect()
         print("Connected.")
-        await camera.ready_async()
+        await camera.ready()
+        print ("Ready sent.")
 
         # Loop
         while True:
             async with state_lock:
                 
                 if state.settings_changed:
-                    # print("MAIN saw settings change:", state.last_settings_result)
+                    #print("MAIN saw settings change:", state.last_settings_result)
                     state.settings_changed = False
                     
                 if state.jobValidationDone:
@@ -144,7 +145,7 @@ async def main():
                     state.state_changed = False
 
                 if state.liveMode_changed:
-                    #print("MAIN saw live mode change:", state.last_liveMode_result)
+                    # print("MAIN saw live mode change:", state.last_liveMode_result)
                     state.liveMode_changed = False       
                     
                 if state.job_changed:
@@ -164,7 +165,7 @@ async def main():
                     state.jobLoading_changed = False
                     
                 if state.result_changed:
-                    await camera.ready_async()
+                    await camera.ready()
                     # print("MAIN saw result:", state.last_result)
                     state.result_changed = False
                     
@@ -190,7 +191,7 @@ async def main():
             
     finally:
         print("Disconnecting...")
-        await camera.disconnect_async()
+        await camera.disconnect()
         print("Disconnected")
 
 if __name__ == "__main__":
