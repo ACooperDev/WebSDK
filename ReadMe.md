@@ -1,98 +1,19 @@
-# Cognex WebSDK (Unofficial)
+# Cognex REST API Implementations (Unofficial)
 
 This is an independent project not affiliated with, endorsed by, or supported by Cognex Corporation.
 
-Implementations are in Python, JavaScript, and .NET.
+Implementations are in Python, JavaScript, and .NET with the goal of creating a standarized object, cognex_camera, across all three programming languages with a common set of properties, methods, and events.
 
-## Python Overview
+Python
+  - Ideal for scripts and automation tasks.
 
-- `cognex_camera.py` defines two classes:
-  - `CogSocket`
-  - `CognexCamera`
-- `async_example.py` is an example implementation of `cognex_camera.py` method calls
-- `event_subscription_example.py` is an example implementation of `cognex_camera.py` event subscription
-- `In-Sight HMI API.pdf` is the ISVS REST API documentation
+JavaScript
+  - Optimized for lightweight control panels and dashboards.
 
-## Python Requirements
-Python 3.14.0
+.NET
+  - Perfect for industiral HMI apps, SCADA, and WinForms/WPF.
 
-Install required packages:
-```bash
-pip install websockets
-```
-```bash
-pip install httpx
-```
-  
-## Python Getting Started
-
-```bash
-import asyncio
-import json
-from cognex_camera import CognexCamera
-
-async def main():
-    # Define a camera
-    camera = CognexCamera(ip='192.168.0.5')
-
-    # Connect to the camera
-    await camera.connect()
-    await camera.ready()
-
-    # Trigger the camera
-    await camera.manual_trigger()
-
-    # Disconnect from the camera
-    await camera.disconnect()
-
-if __name__ == "__main__":
-    asyncio.run(main())
-```
-## Python asyncio Options
-
-```bash
-import asyncio
-import json
-from cognex_camera import CognexCamera
-
-async def main():
-    # Define a camera
-    camera = CognexCamera(ip='192.168.0.5')
-    await camera.ready()
-
-    # Connect to the camera
-
-    # Option 1: Wait for response.  Application will not continue until the response has arrived or times out.
-    info = await camera.get_info()
-    print(f"Camera Info: {info}")
-
-    # Option 2: Fire and forget.  Application will continue without waiting for the respone to arrive.
-    asyncio.create_task(camera.get_info())
-    print("Immediately continue without confirming the action is complete")
-
-    # Option 3: Fire and sort of forget.  Application will continue immediately up until the await is requested.
-    # If it is not complete by that point, the application will not continue until the response has arrived.
-    # If it has completed by that point the application will continue on immediately.
-    task = asyncio.create_task(camera.get_info())
-    # Run some logic
-    value = await task
-    print(f"Camera Info: {value}")
-    
-    # Disconnect from the camera
-
-if __name__ == "__main__":
-    asyncio.run(main())
-```
-## Python Recommendation
-```bash
-# Add Try/Except to all method calls.
-# Example
-try:
-    await camera.someMethod()
-except Exception as e:
-    print(f"Error occurred while running xMethod: {e}")
-```
-
+# cognex_camera (.py, .js, .cs)
 ## Camera Properties
 ```bash
 camera = CognexCamera(ip, optionalProperties)
@@ -204,6 +125,97 @@ camera.selectedEvent.append(yourCustomMethod)
   - Fired after job validation has completed. 
 - on_sessionDisposed_changed
   - Fired when the HMI session has been disposed due to timeout or another disconnection type.
+
+
+# Python Overview
+
+- `cognex_camera.py` defines two classes:
+  - `CogSocket`
+  - `CognexCamera`
+- `async_example.py` is an example implementation of `cognex_camera.py` method calls
+- `event_subscription_example.py` is an example implementation of `cognex_camera.py` event subscription
+- `In-Sight HMI API.pdf` is the ISVS REST API documentation
+
+## Python Requirements
+Python 3.14.0
+
+Install required packages:
+```bash
+pip install websockets
+```
+```bash
+pip install httpx
+```
+  
+## Python Getting Started
+
+```bash
+import asyncio
+import json
+from cognex_camera import CognexCamera
+
+async def main():
+    # Define a camera
+    camera = CognexCamera(ip='192.168.0.5')
+
+    # Connect to the camera
+    await camera.connect()
+    await camera.ready()
+
+    # Trigger the camera
+    await camera.manual_trigger()
+
+    # Disconnect from the camera
+    await camera.disconnect()
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+## Python asyncio Options
+
+```bash
+import asyncio
+import json
+from cognex_camera import CognexCamera
+
+async def main():
+    # Define a camera
+    camera = CognexCamera(ip='192.168.0.5')
+    await camera.ready()
+
+    # Connect to the camera
+
+    # Option 1: Wait for response.  Application will not continue until the response has arrived or times out.
+    info = await camera.get_info()
+    print(f"Camera Info: {info}")
+
+    # Option 2: Fire and forget.  Application will continue without waiting for the respone to arrive.
+    asyncio.create_task(camera.get_info())
+    print("Immediately continue without confirming the action is complete")
+
+    # Option 3: Fire and sort of forget.  Application will continue immediately up until the await is requested.
+    # If it is not complete by that point, the application will not continue until the response has arrived.
+    # If it has completed by that point the application will continue on immediately.
+    task = asyncio.create_task(camera.get_info())
+    # Run some logic
+    value = await task
+    print(f"Camera Info: {value}")
+    
+    # Disconnect from the camera
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+## Python Recommendation
+```bash
+# Add Try/Except to all method calls.
+# Example
+try:
+    await camera.someMethod()
+except Exception as e:
+    print(f"Error occurred while running xMethod: {e}")
+```
+
 
 ## Python Example Event Subscription
 ```bash
