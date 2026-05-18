@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cognex Camera Interface</title>
+</head>
+
+<body>
+    <h1>HTML/JS WebSDK Example</h1>
+
+    <!-- Buttons and Inputs -->
+    <div>
+        <label>IP: <input id="ip" type="text" value="192.168.0.74"></label><br>
+        <label>Username: <input id="username" type="text" value="admin"></label><br>
+        <label>Password: <input id="password" type="password" value=""></label><br>
+        <label>HMI Path: <input id="inputURL" type="text" value="?page=ImageAndGraphics&fillScreen=true"></label><br>
+    </div>
+    <br>
+    <button id="connectBtn">Connect</button>
+    <button id="disconnectBtn" disabled>Disconnect</button>
+    <button id="triggerBtn" disabled>Trigger Manual</button>
+
+    <p id="status">Status: Disconnected</p>
+
+    <br>
+
+    <div>
+        Uncomment the desired method calls in the testButton() function to execute them and see results in the console and label below.
+        <br>
+        <button id="testBtn">Test Button</button>
+        <label>Test Input 1: <input id="testInput1" type="text"></label> <label>Test Input 2: <input id="testInput2" type="text"></label><input type="file" id="testInput3" accept=".bmp">
+        <br>
+        <label id="testLabel">Test Label</label>
+    </div>
+
+    <iframe id="webhmi" style="width:100%;height:420px;border:1px solid #ccc;margin-top:16px;"></iframe>
+
+    <script src="cognex_camera.js"></script>
+    <script>
+        const ROOT = 'cam0/hmi';
+        const CELLS = 'A0:Z100';
+
+        let camera = null;
+
+        //Camera methods    
+        async function connect() {
+            const ip = document.getElementById('ip').value.trim();
+            const USER = document.getElementById('username').value;
+            const PASS = document.getElementById('password').value;
+            const inputURL = document.getElementById('inputURL').value.trim();
+
+            if (!ip) {
+                console.log('Please enter an IP address.');
+                alert('Please enter an IP address.');
+                return;
+            }
+
+            document.getElementById('webhmi').src = 'http://' + ip + '/' + inputURL;
+
+            if (camera) {
+                try {
+                    await camera.disconnect();
+                } catch (_) {
+                    // Ignore disconnect errors when reopening
+                }
+            }
+
+            camera = new CognexCamera(ip, 80, USER, PASS);
+            camera.cells = CELLS;
+
+            //Event subscriptions
+            camera.on_state_changed.push(async (state) => {
+                //console.log('[EVENT] Camera State Changed:', state);
+            });
+
+            camera.on_result_changed.push(async (results) => {
+                console.log('[EVENT] Results Changed:', results);
+            });
+
+            camera.onLiveModeChanged.push(async (isLive) => {
+                //console.log('[EVENT] Live Mode Changed:', isLive);
+            });
+
+            camera.onJobChanged.push(async (jobName) => {
+                //console.log('[EVENT] Job Changed:', jobName);
+            });
+
+            camera.onEditorAttached.push(async () => {
+                //console.log('[EVENT] Editor Attached');
+            });
+
+            try {
+                document.getElementById('status').textContent = 'Status: Connecting...';
+                await camera.connect();
+                document.getElementById('status').textContent = 'Status: Connected and Logged In';
+                document.getElementById('triggerBtn').disabled = false;
+                document.getElementById('disconnectBtn').disabled = false;
+                console.log('Connection established.');
+            } catch (e) {
+                console.error('Connection Failed:', e);
+                document.getElementById('status').textContent = `Status: Error - ${e.message}`;
+            }
+        }
+
+        async function disconnect() {
+            if (!camera) return;
+            try {
+                await camera.disconnect();
+                document.getElementById('status').textContent = 'Status: Disconnected';
+                document.getElementById('triggerBtn').disabled = true;
+                document.getElementById('disconnectBtn').disabled = true;
+                console.log('Disconnected.');
+            } catch (e) {
+                console.error('Disconnect failed:', e);
+            }
+        }
+
+        async function triggerManual() {
+            if (!camera) return;
+            try {
+                await camera.manual_trigger();                
+                console.log('Manual trigger sent successfully.');
+                
+            } catch (e) {
+                console.error('Failed to trigger:', e);
+            }
+        }
+
+        // Test button to execute various camera methods for demonstration pruposes.
+        async function testButton() {
+            
+            const inputValue1 = document.getElementById("testInput1").value;
+            const inputValue2 = document.getElementById("testInput2").value;
+            const inputValue3 = document.getElementById("testInput3");
+            
+            /*
+            // Get info
+            if (!camera) return;
+            try {
+                const info = await camera.getInfo();
+                console.log(info);
+                testLabel.textContent = JSON.stringify(info, null, 2);
+            } catch (e) {
+                console.error('Failed to get info:', e);
+            }
+            */
+
+            /*
+            // Find state
+            if (!camera) return;
+            try {
+                const state = await camera.find_state();
+                console.log(state);
+                testLabel.textContent = JSON.stringify(state, null, 2);
+            } catch (e) {
+                console.error('Failed to get state:', e);
+            }
+            */
+
+            /*
+            // List files
+            if (!camera) return;
+            try {
+                const files = await camera.list_camera_files();
+                console.log(files);
+                testLabel.textContent = JSON.stringify(files, null, 2);
+            } catch (e) {
+                console.error('Failed to get files:', e);
+            }
+            */
+            
+            /*
+            // Set cell expression
+            if (!camera) return;
+            try {
+                await camera.set_cell_expression(inputValue1, inputValue2);
+                console.log(files);
+            } catch (e) {
+                console.error('Failed to set expression:', e);
+            }
+            */
+
+            /*
+            // Set cell value
+            if (!camera) return;
+            try {
+                await camera.set_cell_value(inputValue1, inputValue2);
+                console.log(files);
+            } catch (e) {
+                console.error('Failed to set value:', e);
+            }
+            */
+
+            /*
+            // Query cell results
+            if (!camera) return;
+            try {
+                const cells = await camera.query_check_cell_results(inputValue1);
+                console.log(cells);
+                testLabel.textContent = JSON.stringify(cells, null, 2);
+            } catch (e) {
+                console.error('Failed to query cells:', e);
+            }
+            */
+
+            /*
+            // Get cell expressions
+            if (!camera) return;
+            try {
+                const cells = await camera.get_cell_expressions(inputValue1);
+                console.log(cells);
+                testLabel.textContent = JSON.stringify(cells, null, 2);
+            } catch (e) {
+                console.error('Failed to get cell expressions:', e);        
+            }
+            */
+
+            /*
+            // Enable/disable live mode
+            if (!camera) return;
+            try {
+                await camera.live_mode(true);
+                console.log('Live mode set to:', "True");
+                testLabel.textContent = "True"
+            } catch (e) {
+                console.error('Failed to set live mode:', e);       
+            }
+
+            if (!camera) return;
+            try {
+                await camera.live_mode(false);
+                console.log('Live mode set to:', "False");
+                testLabel.textContent = "False"
+            } catch (e) {
+                console.error('Failed to set live mode:', e);       
+            }
+            */
+
+            /*
+            // Go offline
+            if (!camera) return;
+            try {
+                await camera.go_offline();
+                console.log('Camera set to offline mode');
+                testLabel.textContent = "Offline"
+            } catch (e) {
+                console.error('Failed to set offline mode:', e);    
+            }
+            */
+
+            /*
+            // Go online
+            if (!camera) return;
+            try {
+                await camera.go_online();
+                console.log('Camera set to online mode');
+                testLabel.textContent = "Online"
+            } catch (e) {
+                console.error('Failed to set online mode:', e);    
+            }
+            */
+
+            /*            
+            // Toggle online/offline
+            if (!camera) return;
+            try {
+                await camera.online_offline();
+                console.log('Camera set to offline mode');
+                testLabel.textContent = "Offline"
+                await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds
+                await camera.goOnline();
+                console.log('Camera set to online mode');
+                testLabel.textContent = "Online"
+            } catch (e) {
+                console.error('Failed to toggle online/offline mode:', e);
+            }
+            */
+
+            /*
+            // Current job info
+            if (!camera) return;
+            try {
+                const jobInfo = await camera.get_jobinfo();
+                console.log(jobInfo);
+                //testLabel.textContent = JSON.stringify(jobInfo, null, 2);
+                const jobObj = JSON.parse(jobInfo);
+                testLabel.textContent = jobObj.name;
+            } catch (e) {
+                console.error('Failed to get job info:', e);
+            }
+            */
+
+            /*
+            // Save job
+            if (!camera) return;
+            try {
+                await camera.save_job(inputValue1);
+                console.log('Job saved successfully.');
+            } catch (e) {
+                console.error('Failed to save job:', e);    
+            }
+            */
+
+            /*
+            // Load job
+            if (!camera) return;
+            try {
+                await camera.load_job(inputValue1);
+                console.log('Job loaded successfully.');
+            } catch (e) {
+                console.error('Failed to load job:', e);
+            }
+            */
+
+            /*
+            // Send ready
+            if (!camera) return;
+            try {
+                await camera.ready();
+                console.log('Ready signal sent successfully.');
+            } catch (e) {
+                console.error('Failed to send ready signal:', e);
+            }
+            */
+
+            /*
+            // Get session IDs
+            if (!camera) return;
+            try {
+                const sessions = await camera.session_IDs();
+                console.log(sessions);
+                testLabel.textContent = JSON.stringify(sessions, null, 2)
+            } catch (e) {
+                console.error('Failed to get session IDs:', e);
+            }
+            */
+
+            /*
+            // Get job validation state
+            if (!camera) return;
+            try {
+                const validationState = await camera.job_validation_state();
+                console.log(validationState);
+                testLabel.textContent = JSON.stringify(validationState, null, 2)
+            } catch (e) {
+                console.error('Failed to get job validation state:', e);   
+            }
+            */
+
+            /*
+            // Get system validation flag
+            if (!camera) return;
+            try {
+                const validationFlag = await camera.system_validation_flag();
+                console.log(validationFlag);
+                testLabel.textContent = JSON.stringify(validationFlag, null, 2)
+            } catch (e) {
+                console.error('Failed to get job validation flag:', e);
+            }
+            */
+
+            /*
+            // Run job validation
+            if (!camera) return;
+            try {
+                await camera.run_job_validation();
+                console.log('Job validation executed successfully.');
+            } catch (e) {
+                console.error('Failed to execute job validation:', e); 
+            }
+            */
+
+            /*
+            // Cancel job validation
+            if (!camera) return;
+            try {
+                await camera.cancel_job_validation();
+                console.log('Job validation cancelled successfully.');
+            } catch (e) {   
+                console.error('Failed to cancel job validation:', e); 
+            }  
+            */
+
+            /*
+            // Get/set keep alive interval
+            if (!camera) return;
+                try {
+                    const interval = await camera.get_keep_alive_interval();
+                    console.log('Current Keep Alive Interval:', interval);
+                    testLabel.textContent = `Current Keep Alive Interval: ${interval} ms`;
+                    
+                    const newInterval = parseInt(inputValue1);
+                    if (!isNaN(newInterval)) {
+                        await camera.set_keep_alive_interval(newInterval);
+                        console.log('Keep Alive Interval updated to:', newInterval);
+                        testLabel.textContent = `Updated Keep Alive Interval: ${newInterval} ms`;
+                    }
+                } catch (e) {
+                    console.error('Failed to get/set keep alive interval:', e); 
+            }
+            */
+
+            /* Does not work...  Not likely to work from a browser
+            // Load image
+            if (!camera) return;
+            try {
+                await camera.load_image(inputValue3.files[0]);
+                console.log('Image data loaded successfully:', imageData);
+                testLabel.textContent = `Image data loaded successfully: ${JSON.stringify(imageData)}`;
+            } catch (e) {
+                console.error('Failed to load image:', e);
+                console.error(e);
+                console.error(e.stack);
+                alert(e);
+            }
+            */
+        }
+
+        // HTML document event listeners
+        document.getElementById('connectBtn').addEventListener('click', connect);
+        document.getElementById('disconnectBtn').addEventListener('click', disconnect);
+        document.getElementById('triggerBtn').addEventListener('click', triggerManual);
+        document.getElementById('testBtn').addEventListener('click', testButton);
+
+        window.addEventListener('beforeunload', async () => {
+            if (camera) {
+                await camera.disconnect();
+            }
+        });
+    </script>
+</body>
+</html>
