@@ -33,8 +33,37 @@ if __name__ == "__main__":
 ### Mac/Linux
 
 <pre lang="bash"><code>
-pip3 install mypackage
-python3 app.py
+import asyncio
+import json
+from cognex_camera import CognexCamera
+
+async def main():
+    # Define a camera
+    camera = CognexCamera(ip='192.168.0.5')
+    await camera.ready_async()
+
+    # Connect to the camera
+
+    # Option 1: Wait for response.  Application will not continue until the response has arrived or times out.
+    info = await camera.get_info_async()
+    print(f"Camera Info: {info}")
+
+    # Option 2: Fire and forget.  Application will continue without waiting for the respone to arrive.
+    asyncio.create_task(camera.get_info_async())
+    print("Immediately continue without confirming the action is complete")
+
+    # Option 3: Fire and sort of forget.  Application will continue immediately up until the await is requested.
+    # If it is not complete by that point, the application will not continue until the response has arrived.
+    # If it has completed by that point the application will continue on immediately.
+    task = asyncio.create_task(camera.get_info_async())
+    # Run some logic
+    value = await task
+    print(f"Camera Info: {value}")
+    
+    # Disconnect from the camera
+
+if __name__ == "__main__":
+    asyncio.run(main())
 </code></pre>
 
 </td>
