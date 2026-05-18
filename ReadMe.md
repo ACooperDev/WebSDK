@@ -38,14 +38,14 @@ async def main():
     camera = CognexCamera(ip='192.168.0.5')
 
     # Connect to the camera
-    await camera.connect_async()
-    await camera.ready_async()
+    await camera.connect()
+    await camera.ready()
 
     # Trigger the camera
-    await camera.manual_trigger_async()
+    await camera.manual_trigger()
 
     # Disconnect from the camera
-    await camera.disconnect_async()
+    await camera.disconnect()
 
 if __name__ == "__main__":
     asyncio.run(main())
@@ -60,22 +60,22 @@ from cognex_camera import CognexCamera
 async def main():
     # Define a camera
     camera = CognexCamera(ip='192.168.0.5')
-    await camera.ready_async()
+    await camera.ready()
 
     # Connect to the camera
 
     # Option 1: Wait for response.  Application will not continue until the response has arrived or times out.
-    info = await camera.get_info_async()
+    info = await camera.get_info()
     print(f"Camera Info: {info}")
 
     # Option 2: Fire and forget.  Application will continue without waiting for the respone to arrive.
-    asyncio.create_task(camera.get_info_async())
+    asyncio.create_task(camera.get_info())
     print("Immediately continue without confirming the action is complete")
 
     # Option 3: Fire and sort of forget.  Application will continue immediately up until the await is requested.
     # If it is not complete by that point, the application will not continue until the response has arrived.
     # If it has completed by that point the application will continue on immediately.
-    task = asyncio.create_task(camera.get_info_async())
+    task = asyncio.create_task(camera.get_info())
     # Run some logic
     value = await task
     print(f"Camera Info: {value}")
@@ -128,57 +128,57 @@ await camera.selectedMethod
 value = await camera.selectedMethod
 
 ````
-- connect_async()
+- connect()
   - Connects to the camera and creates a session.   
-- disconnect_async()
+- disconnect()
   - Disconnects from the camera and closes the session. 
-- manual_trigger_async()
+- manual_trigger()
   - Manually triggers an acquisition. 
-- live_mode_async(bool)
+- live_mode(bool)
   - Enables or disables live mode.
-- online_offline_async()
+- online_offline()
   - Toggles to the opposite online state. 
-- query_check_cell_results_async(cell: str)
+- query_check_cell_results(cell: str)
   - Query cells results
-- get_cell_expressions_async(cells: str)
+- get_cell_expressions(cells: str)
   - Gets cell expressions.
-- set_cell_expression_async(cell: str, function: str)
+- set_cell_expression(cell: str, function: str)
   - Sets a cell expression.
-- set_cell_value_async(cell: str, value)
+- set_cell_value(cell: str, value)
   - Sets a cell value. 
-- list_camera_files_async()
+- list_camera_files()
   - Lists all files on a camera.
-- get_info_async()
+- get_info()
   - Returns info not limited to cameara name, model, firmware, MAC, and serial.
-- find_state_async()
+- find_state()
   - Returns online state for discrete online, ffp online, live mode online, native online, online, and soft online. 
-- go_online_async()
+- go_online()
   - Sets soft online to true 
-- go_offline_async()
+- go_offline()
   - Sets soft online to false.
-- get_jobinfo_async()
+- get_jobinfo()
   - Returns job information including job name.
-- save_job_async(job: str)
+- save_job(job: str)
   - Saves the current job with the chosen job name.
-- load_job_async(job: str)
+- load_job(job: str)
   - Loads a job by name.
-- ready_async()
+- ready()
   - Updates the result for the session when one is available from a camera.  A on_result_changed event is raised when the result has changed.
-- session_IDs_async()
+- session_IDs()
   - Gets all camera sessions by ID.
-- job_validation_state_async()
+- job_validation_state()
   - Returns the state of validation.
 - system_validation_flag_asyn()
   - Gets the state of system validation.
-- run_job_validation_async()
+- run_job_validation()
   - Runs the job validation set.
-- cancel_job_validation_async()
+- cancel_job_validation()
   - Cancels a started job validation run.
-- get_keep_alive_interval_async()
+- get_keep_alive_interval()
   - Returns the session timeout interval.
-- set_keep_alive_interval_async(value)
+- set_keep_alive_interval(value)
   - Sets the session timeout interval.
-- load_image_async(imagePath: str, imageName: str)
+- load_image(imagePath: str, imageName: str)
   - Loads an image from disk to the camera. 
 
 ## Camera Events
@@ -239,8 +239,8 @@ async def main():
 
     try:
         # Connect
-        await camera.connect_async()
-        await camera.ready_async()
+        await camera.connect()
+        await camera.ready()
 
         # Loop
         while True:
@@ -256,7 +256,7 @@ async def main():
             
     finally:
         print("Disconnecting...")
-        await camera.disconnect_async()
+        await camera.disconnect()
         print("Disconnected")
 
 if __name__ == "__main__":
