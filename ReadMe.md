@@ -1,8 +1,10 @@
-# Cognex WebSDK In Python (Unofficial)
+# Cognex WebSDK (Unofficial)
 
 This is an independent project not affiliated with, endorsed by, or supported by Cognex Corporation.
 
-## Overview
+Implementations are in Python, JavaScript, and .NET.
+
+## Python Overview
 
 - `cognex_camera.py` defines two classes:
   - `CogSocket`
@@ -11,7 +13,7 @@ This is an independent project not affiliated with, endorsed by, or supported by
 - `event_subscription_example.py` is an example implementation of `cognex_camera.py` event subscription
 - `In-Sight HMI API.pdf` is the ISVS REST API documentation
 
-## Requirements
+## Python Requirements
 Python 3.14.0
 
 Install required packages:
@@ -22,7 +24,7 @@ pip install websockets
 pip install httpx
 ```
   
-## Getting Started
+## Python Getting Started
 
 ```bash
 import asyncio
@@ -46,7 +48,7 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 ```
-## asyncio Options
+## Python asyncio Options
 
 ```bash
 import asyncio
@@ -81,7 +83,7 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 ```
-## Recommendation
+## Python Recommendation
 ```bash
 # Add Try/Except to all method calls.
 # Example
@@ -203,7 +205,7 @@ camera.selectedEvent.append(yourCustomMethod)
 - on_sessionDisposed_changed
   - Fired when the HMI session has been disposed due to timeout or another disconnection type.
 
-## Example Event Subscription
+## Python Example Event Subscription
 ```bash
 import asyncio
 import json
