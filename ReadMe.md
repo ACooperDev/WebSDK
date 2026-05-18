@@ -1,3 +1,47 @@
+<table>
+<tr>
+<td valign="top">
+
+### Windows
+
+<pre lang="bash"><code>
+import asyncio
+import json
+from cognex_camera import CognexCamera
+
+async def main():
+    # Define a camera
+    camera = CognexCamera(ip='192.168.0.5')
+
+    # Connect to the camera
+    await camera.connect_async()
+    await camera.ready_async()
+
+    # Trigger the camera
+    await camera.manual_trigger_async()
+
+    # Disconnect from the camera
+    await camera.disconnect_async()
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+
+</td>
+<td valign="top">
+
+### Mac/Linux
+
+<pre lang="bash"><code>
+pip3 install mypackage
+python3 app.py
+</code></pre>
+
+</td>
+</tr>
+</table>
+
+
 # Cognex WebSDK In Python (Unofficial)
 
 This is an independent project not affiliated with, endorsed by, or supported by Cognex Corporation.
