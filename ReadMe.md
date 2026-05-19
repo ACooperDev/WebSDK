@@ -113,8 +113,15 @@ const value = await camera.selectedMethod
 
 ## Camera Events
 ```bash
+# Python
 camera = CognexCamera(ip)
 camera.selectedEvent.append(yourCustomMethod)
+
+// JavaScript
+camera = new CognexCamera(ip)
+camera.selectedEvent.push(async (state) =>{
+  console.log(state);
+});
 ````
 - on_state_changed
   - Fired when the camera state changes. 
