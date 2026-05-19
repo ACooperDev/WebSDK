@@ -16,7 +16,7 @@ JavaScript
 # cognex_camera (.py, .js, .cs)
 ## Camera Properties
 ```bash
-//Python
+# Python
 camera = CognexCamera(ip, optionalProperties)
 
 //JavaScript
@@ -45,10 +45,17 @@ camera = new CognexCamera(ip, optionalProperties)
   
 ## Camera Methods
 ```bash
+# Python
 camera = CognexCamera(ip)
 await camera.selectedMethod
 # or
 value = await camera.selectedMethod
+
+//JavaScript
+camera = new Camera(ip)
+await camera.selectedMethod
+//or
+const value = await camera.selectedMethod
 
 ````
 - connect()
