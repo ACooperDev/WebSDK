@@ -16,7 +16,11 @@ JavaScript
 # cognex_camera (.py, .js, .cs)
 ## Camera Properties
 ```bash
+//Python
 camera = CognexCamera(ip, optionalProperties)
+
+//JavaScript
+camera = new CognexCamera(ip, optionalProperties)
 ````
 - Required to create a new camera
   - ip (string)
