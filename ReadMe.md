@@ -276,3 +276,61 @@ if __name__ == "__main__":
   - `CogSocket`
   - `CognexCamera`
 - `example.html` is an example emplementation of `cognex_camera.js`
+
+## JavaScript Getting Started
+```bash
+<html>
+    <body>
+            <script src="cognex_camera.js"></script>
+            <script>
+                        const ROOT = 'cam0/hmi';
+                        const CELLS = 'A0:Z100';
+                        const ip = '192.168.0.74';
+                        const USER = 'admin';
+                        const PASS = '';
+
+                        let camera = null;
+
+                        camera = new CognexCamera(ip, 80, USER, PASS);
+                        camera.cells = CELLS;
+
+                        //Event subscriptions
+                        camera.on_state_changed.push(async (state) => {
+                        //console.log('[EVENT] Camera State Changed:', state);
+                        });
+
+                        camera.on_result_changed.push(async (results) => {
+                        //console.log('[EVENT] Results Changed:', results);
+                        });
+
+                        camera.onLiveModeChanged.push(async (isLive) => {
+                        //console.log('[EVENT] Live Mode Changed:', isLive);
+                        });
+
+                        camera.onJobChanged.push(async (jobName) => {
+                        //console.log('[EVENT] Job Changed:', jobName);
+                        });
+
+                        camera.onEditorAttached.push(async () => {
+                        //console.log('[EVENT] Editor Attached');
+                        });
+
+                        connectTriggerGetInfoDisconnect();
+
+                        //Example function
+                        async function connectTriggerGetInfoDisconnect(){
+                            try{
+                                await camera.connect();
+                                await camera.manual_trigger();
+                                const files = await camera.list_camera_files()
+                                console.log(files)
+                                await camera.disconnect();
+                            }catch (e) {
+                                console.log('Failure: ', e);
+
+                            }
+                        }
+            </script>
+    </body>
+</html>
+```
