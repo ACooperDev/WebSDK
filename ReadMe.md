@@ -19,7 +19,7 @@ JavaScript
 # Python
 camera = CognexCamera(ip, optionalProperties)
 
-//JavaScript
+// JavaScript
 camera = new CognexCamera(ip, optionalProperties)
 ````
 - Required to create a new camera
@@ -51,10 +51,10 @@ await camera.selectedMethod
 # or
 value = await camera.selectedMethod
 
-//JavaScript
+// JavaScript
 camera = new Camera(ip)
 await camera.selectedMethod
-//or
+// or
 const value = await camera.selectedMethod
 
 ````
