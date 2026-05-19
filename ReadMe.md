@@ -134,7 +134,6 @@ camera.selectedEvent.append(yourCustomMethod)
   - `CognexCamera`
 - `async_example.py` is an example implementation of `cognex_camera.py` method calls
 - `event_subscription_example.py` is an example implementation of `cognex_camera.py` event subscription
-- `In-Sight HMI API.pdf` is the ISVS REST API documentation
 
 ## Python Requirements
 Python 3.14.0
