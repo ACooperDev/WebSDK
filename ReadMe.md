@@ -126,13 +126,12 @@ camera.selectedEvent.append(yourCustomMethod)
 - on_sessionDisposed_changed
   - Fired when the HMI session has been disposed due to timeout or another disconnection type.
 
-
 # Python Overview
 
 - `cognex_camera.py` defines two classes:
   - `CogSocket`
   - `CognexCamera`
-- `async_example.py` is an example implementation of `cognex_camera.py` method calls
+- `async_example.py` is an example implementation of `cognex_camera.py`
 - `event_subscription_example.py` is an example implementation of `cognex_camera.py` event subscription
 
 ## Python Requirements
@@ -272,3 +271,8 @@ if __name__ == "__main__":
     asyncio.run(main())
 
 ````
+# JavaScript Overview
+- `cognex_camera.js` defines two classes:
+  - `CogSocket`
+  - `CognexCamera`
+- `example.html` is an example emplementation of `cognex_camera.js`
