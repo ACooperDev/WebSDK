@@ -1,5 +1,5 @@
 # Cognex REST API Implementations (Unofficial)
-TODO: standardize on event names, .NET
+TODO: standardize on event names
 
 This is an independent project not affiliated with, endorsed by, or supported by Cognex Corporation.
 
