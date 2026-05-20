@@ -8,7 +8,7 @@ Implementations are in Python, JavaScript, and .NET with the goal of creating a 
 Python
   - Ideal for scripts and automation tasks.
 
-JavaScript
+[JavaScript](#javascript-overview)
   - Optimized for lightweight control panels and dashboards.
 
 [C# .NET](#net-c-getting-started)
