@@ -420,7 +420,6 @@ namespace myConsoleApp
         // Event handler
         private async static void ResultsChanged(object? sender, EventArgs e)
         {
-            
             Console.WriteLine("Results Changed Event");
             CvsInSight camera = sender as CvsInSight;
             await camera.SendReady();
