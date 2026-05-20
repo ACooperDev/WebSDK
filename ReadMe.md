@@ -11,7 +11,7 @@ Python
 JavaScript
   - Optimized for lightweight control panels and dashboards.
 
-C# .NET [Go to .NET C# Getting Started](#net-c-getting-started)
+[C# .NET](#net-c-getting-started)
   - Perfect for industiral HMI apps, SCADA, and WinForms/WPF.
 
 # cognex_camera (.py, .js, .cs)
