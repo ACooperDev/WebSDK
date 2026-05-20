@@ -353,3 +353,90 @@ if __name__ == "__main__":
     </body>
 </html>
 ```
+# .NET C# Overview
+- `Cognex.InSight.Web.dll` defines two classes:
+  - `CogSocket`
+  - `CvsInSight`
+- `Program.cs` is an example emplementation of `Cognex.InSight.Web.dll`
+
+## .NET C# Requirements
+.NET Framework or .NET
+
+Install required packages:
+```bash
+dotnet add package Newtonsoft.Json
+```
+```bash
+dotnet add package WebSocketSharp.Standard --version 1.0.3
+```
+
+## .NET C# Getting Started
+```bash
+using Cognex.InSight.Remoting.Serialization;
+using Cognex.InSight.Web;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+namespace myConsoleApp
+{
+    internal class Program
+    {
+        static async Task Main(string[] args)
+        {
+            CvsInSight camera = new CvsInSight();
+
+            // Event subscription
+            camera.ResultsChanged += ResultsChanged;
+
+            // Camera setup
+            HmiSessionInfo sessionInfo = new HmiSessionInfo
+            {
+                SheetName = "Inspection",
+                CellNames = new[] { "A0:Z599" },
+                EnableQueuedResults = true,
+                IncludeCustomView = true
+            };
+
+            Console.WriteLine("Connecting...");
+            await camera.Connect("192.168.0.74:80", "admin", "", sessionInfo);
+            Console.WriteLine("Connected");
+            
+            await camera.SendReady();
+
+            Console.WriteLine("Sending trigger");
+            await camera.ManualAcquire();
+            Console.WriteLine("Trigger sent");
+
+            // Keep console app alive so events can happen
+            Console.WriteLine("Press ENTER to exit");
+            Console.ReadLine();
+
+            // Unsubscribe and disconnect
+            camera.ResultsChanged -= ResultsChanged;
+
+            await camera.Disconnect();
+        }
+
+        // Event handler
+        private async static void ResultsChanged(object? sender, EventArgs e)
+        {
+            
+            Console.WriteLine("Results Changed Event");
+            CvsInSight camera = sender as CvsInSight;
+            await camera.SendReady();
+            JToken results = camera.Results;
+            //Console.WriteLine(results);
+
+            //Get a particular cell value by name or location
+            JArray cells = (JArray)results["cells"];
+            JToken myCell = cells.FirstOrDefault(c => (string)c["location"] == "B3");
+            if (myCell != null)
+            {
+                int value = myCell["data"].Value<int>();
+                Console.WriteLine(value.ToString());
+            }
+        }
+    }
+}
+
+```
