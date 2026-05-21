@@ -59,7 +59,7 @@
 
             if (camera) {
                 try {
-                    await camera.disconnect();
+                    await camera.Disconnect();
                 } catch (_) {
                     // Ignore disconnect errors when reopening
                 }
@@ -95,7 +95,7 @@
 
             try {
                 document.getElementById('status').textContent = 'Status: Connecting...';
-                await camera.connect();
+                await camera.Connect();
                 document.getElementById('status').textContent = 'Status: Connected and Logged In';
                 document.getElementById('triggerBtn').disabled = false;
                 document.getElementById('disconnectBtn').disabled = false;
@@ -109,7 +109,7 @@
         async function disconnect() {
             if (!camera) return;
             try {
-                await camera.disconnect();
+                await camera.Disconnect();
                 document.getElementById('status').textContent = 'Status: Disconnected';
                 document.getElementById('triggerBtn').disabled = true;
                 document.getElementById('disconnectBtn').disabled = true;
@@ -122,7 +122,7 @@
         async function triggerManual() {
             if (!camera) return;
             try {
-                await camera.manual_trigger();                
+                await camera.ManualAcquire();                
                 console.log('Manual trigger sent successfully.');
                 
             } catch (e) {
@@ -141,7 +141,7 @@
             // Get info
             if (!camera) return;
             try {
-                const info = await camera.getInfo();
+                const info = await camera.Info();
                 console.log(info);
                 testLabel.textContent = JSON.stringify(info, null, 2);
             } catch (e) {
@@ -153,7 +153,7 @@
             // Find state
             if (!camera) return;
             try {
-                const state = await camera.find_state();
+                const state = await camera.FindState();
                 console.log(state);
                 testLabel.textContent = JSON.stringify(state, null, 2);
             } catch (e) {
@@ -165,7 +165,7 @@
             // List files
             if (!camera) return;
             try {
-                const files = await camera.list_camera_files();
+                const files = await camera.ListFiles();
                 console.log(files);
                 testLabel.textContent = JSON.stringify(files, null, 2);
             } catch (e) {
@@ -177,8 +177,7 @@
             // Set cell expression
             if (!camera) return;
             try {
-                await camera.set_cell_expression(inputValue1, inputValue2);
-                console.log(files);
+                await camera.SetCellExpression(inputValue1, inputValue2);
             } catch (e) {
                 console.error('Failed to set expression:', e);
             }
@@ -188,8 +187,7 @@
             // Set cell value
             if (!camera) return;
             try {
-                await camera.set_cell_value(inputValue1, inputValue2);
-                console.log(files);
+                await camera.SetCellValue(inputValue1, inputValue2);
             } catch (e) {
                 console.error('Failed to set value:', e);
             }
@@ -199,7 +197,7 @@
             // Query cell results
             if (!camera) return;
             try {
-                const cells = await camera.query_check_cell_results(inputValue1);
+                const cells = await camera.QueryCellResults(inputValue1);
                 console.log(cells);
                 testLabel.textContent = JSON.stringify(cells, null, 2);
             } catch (e) {
@@ -211,7 +209,7 @@
             // Get cell expressions
             if (!camera) return;
             try {
-                const cells = await camera.get_cell_expressions(inputValue1);
+                const cells = await camera.GetCellExpression(inputValue1);
                 console.log(cells);
                 testLabel.textContent = JSON.stringify(cells, null, 2);
             } catch (e) {
@@ -223,7 +221,7 @@
             // Enable/disable live mode
             if (!camera) return;
             try {
-                await camera.live_mode(true);
+                await camera.SetLiveModeAsync(true);
                 console.log('Live mode set to:', "True");
                 testLabel.textContent = "True"
             } catch (e) {
@@ -232,7 +230,7 @@
 
             if (!camera) return;
             try {
-                await camera.live_mode(false);
+                await camera.SetLiveModeAsync(false);
                 console.log('Live mode set to:', "False");
                 testLabel.textContent = "False"
             } catch (e) {
@@ -244,7 +242,7 @@
             // Go offline
             if (!camera) return;
             try {
-                await camera.go_offline();
+                await camera.SetSoftOnlineAsync(false);
                 console.log('Camera set to offline mode');
                 testLabel.textContent = "Offline"
             } catch (e) {
@@ -256,7 +254,7 @@
             // Go online
             if (!camera) return;
             try {
-                await camera.go_online();
+                await camera.SetSoftOnlineAsync(true);
                 console.log('Camera set to online mode');
                 testLabel.textContent = "Online"
             } catch (e) {
@@ -264,17 +262,11 @@
             }
             */
 
-            /*            
+            /*        
             // Toggle online/offline
             if (!camera) return;
             try {
                 await camera.online_offline();
-                console.log('Camera set to offline mode');
-                testLabel.textContent = "Offline"
-                await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds
-                await camera.goOnline();
-                console.log('Camera set to online mode');
-                testLabel.textContent = "Online"
             } catch (e) {
                 console.error('Failed to toggle online/offline mode:', e);
             }
@@ -284,7 +276,7 @@
             // Current job info
             if (!camera) return;
             try {
-                const jobInfo = await camera.get_jobinfo();
+                const jobInfo = await camera.GetJobInfo();
                 console.log(jobInfo);
                 //testLabel.textContent = JSON.stringify(jobInfo, null, 2);
                 const jobObj = JSON.parse(jobInfo);
@@ -298,7 +290,7 @@
             // Save job
             if (!camera) return;
             try {
-                await camera.save_job(inputValue1);
+                await camera.SaveJob(inputValue1);
                 console.log('Job saved successfully.');
             } catch (e) {
                 console.error('Failed to save job:', e);    
@@ -309,7 +301,7 @@
             // Load job
             if (!camera) return;
             try {
-                await camera.load_job(inputValue1);
+                await camera.LoadJob(inputValue1);
                 console.log('Job loaded successfully.');
             } catch (e) {
                 console.error('Failed to load job:', e);
@@ -320,7 +312,7 @@
             // Send ready
             if (!camera) return;
             try {
-                await camera.ready();
+                await camera.SendReady();
                 console.log('Ready signal sent successfully.');
             } catch (e) {
                 console.error('Failed to send ready signal:', e);
@@ -331,7 +323,7 @@
             // Get session IDs
             if (!camera) return;
             try {
-                const sessions = await camera.session_IDs();
+                const sessions = await camera.GetSessionIDs();
                 console.log(sessions);
                 testLabel.textContent = JSON.stringify(sessions, null, 2)
             } catch (e) {
@@ -343,7 +335,7 @@
             // Get job validation state
             if (!camera) return;
             try {
-                const validationState = await camera.job_validation_state();
+                const validationState = await camera.JobValidationState();
                 console.log(validationState);
                 testLabel.textContent = JSON.stringify(validationState, null, 2)
             } catch (e) {
@@ -355,7 +347,7 @@
             // Get system validation flag
             if (!camera) return;
             try {
-                const validationFlag = await camera.system_validation_flag();
+                const validationFlag = await camera.SystemValidationFlag();
                 console.log(validationFlag);
                 testLabel.textContent = JSON.stringify(validationFlag, null, 2)
             } catch (e) {
@@ -367,7 +359,7 @@
             // Run job validation
             if (!camera) return;
             try {
-                await camera.run_job_validation();
+                await camera.RunJobValidation();
                 console.log('Job validation executed successfully.');
             } catch (e) {
                 console.error('Failed to execute job validation:', e); 
@@ -378,7 +370,7 @@
             // Cancel job validation
             if (!camera) return;
             try {
-                await camera.cancel_job_validation();
+                await camera.CancelJobValidation();
                 console.log('Job validation cancelled successfully.');
             } catch (e) {   
                 console.error('Failed to cancel job validation:', e); 
@@ -389,13 +381,13 @@
             // Get/set keep alive interval
             if (!camera) return;
                 try {
-                    const interval = await camera.get_keep_alive_interval();
+                    const interval = await camera.GetKeepAliveTimeout();
                     console.log('Current Keep Alive Interval:', interval);
                     testLabel.textContent = `Current Keep Alive Interval: ${interval} ms`;
                     
                     const newInterval = parseInt(inputValue1);
                     if (!isNaN(newInterval)) {
-                        await camera.set_keep_alive_interval(newInterval);
+                        await camera.SetKeepAliveTimeout(newInterval);
                         console.log('Keep Alive Interval updated to:', newInterval);
                         testLabel.textContent = `Updated Keep Alive Interval: ${newInterval} ms`;
                     }
@@ -404,11 +396,11 @@
             }
             */
 
-            /* Does not work...  Not likely to work from a browser
+            /* Does not work...  Not likely to work from a browser, maybe someone smarter than me can fix this.
             // Load image
             if (!camera) return;
             try {
-                await camera.load_image(inputValue3.files[0]);
+                await camera.LoadImage(inputValue3.files[0]);
                 console.log('Image data loaded successfully:', imageData);
                 testLabel.textContent = `Image data loaded successfully: ${JSON.stringify(imageData)}`;
             } catch (e) {
@@ -428,7 +420,7 @@
 
         window.addEventListener('beforeunload', async () => {
             if (camera) {
-                await camera.disconnect();
+                await camera.Disconnect();
             }
         });
     </script>
