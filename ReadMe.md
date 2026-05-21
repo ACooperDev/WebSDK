@@ -383,6 +383,7 @@ dotnet add package Newtonsoft.Json
 ```bash
 dotnet add package WebSocketSharp.Standard --version 1.0.3
 ```
+Cognex.InSight.Web can be built/modified from [here](./C#/cognex_camera/)
 
 ## .NET C# Getting Started
 ```csharp
