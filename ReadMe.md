@@ -4,9 +4,6 @@ TODO: standardize on event names and method names
 online_offline - toggles softonline  maybe call it OnlineOffline
 FindState
 
-Python
-- events
-- methods
 
 This is an independent project not affiliated with, endorsed by, or supported by Cognex Corporation.
 
@@ -66,57 +63,55 @@ await camera.selectedMethod
 const value = await camera.selectedMethod
 
 ````
-- connect()
+- Connect()
   - Connects to the camera and creates a session.   
-- disconnect()
+- Disconnect()
   - Disconnects from the camera and closes the session. 
-- manual_trigger()
+- ManualAcquire()
   - Manually triggers an acquisition. 
-- live_mode(bool)
+- SetLiveModeAsync(bool)
   - Enables or disables live mode.
 - online_offline()
   - Toggles to the opposite online state. 
-- query_check_cell_results(cell: str)
+- QueryCellResults(cell: str)
   - Query cells results
-- get_cell_expressions(cells: str)
+- GetCellExpression(cells: str)
   - Gets cell expressions.
-- set_cell_expression(cell: str, function: str)
+- SetCellExpression(cell: str, function: str)
   - Sets a cell expression.
-- set_cell_value(cell: str, value)
+- SetCellValue(cell: str, value)
   - Sets a cell value. 
-- list_camera_files()
+- ListFiles()
   - Lists all files on a camera.
-- get_info()
+- Info()
   - Returns info not limited to cameara name, model, firmware, MAC, and serial.
-- find_state()
+- FindState()
   - Returns online state for discrete online, ffp online, live mode online, native online, online, and soft online. 
-- go_online()
+- SetLiveModeAsync(bool)
   - Sets soft online to true 
-- go_offline()
-  - Sets soft online to false.
-- get_jobinfo()
+- GetJobInfo()
   - Returns job information including job name.
-- save_job(job: str)
+- SaveJob(job: str)
   - Saves the current job with the chosen job name.
-- load_job(job: str)
+- LoadJob(job: str)
   - Loads a job by name.
-- ready()
+- SendReady()
   - Updates the result for the session when one is available from a camera.  A on_result_changed event is raised when the result has changed.
-- session_IDs()
+- GetSessionIDs()
   - Gets all camera sessions by ID.
-- job_validation_state()
+- JobValidationState()
   - Returns the state of validation.
-- system_validation_flag_asyn()
+- SystemValidationFlag()
   - Gets the state of system validation.
-- run_job_validation()
+- RunJobValidation()
   - Runs the job validation set.
-- cancel_job_validation()
+- CancelJobValidation()
   - Cancels a started job validation run.
-- get_keep_alive_interval()
+- GetKeepAliveTimeout()
   - Returns the session timeout interval.
-- set_keep_alive_interval(value)
+- SetKeepAliveTimeout(value)
   - Sets the session timeout interval.
-- load_image(imagePath: str, imageName: str)
+- LoadImage(imagePath: str, imageName: str)
   - Loads an image from disk to the camera. 
 
 ## Camera Events
