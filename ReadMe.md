@@ -28,6 +28,10 @@ camera = CognexCamera(ip, optionalProperties)
 
 // JavaScript
 camera = new CognexCamera(ip, optionalProperties)
+
+// C#
+CvsInSight camera = new CvsInsight();
+camera.Connect(ip, optionalProperties);
 ````
 - Required to create a new camera
   - ip (string)
@@ -53,16 +57,19 @@ camera = new CognexCamera(ip, optionalProperties)
 ## Camera Methods
 ```bash
 # Python
-camera = CognexCamera(ip)
 await camera.selectedMethod
 # or
 value = await camera.selectedMethod
 
 // JavaScript
-camera = new Camera(ip)
 await camera.selectedMethod
 // or
 const value = await camera.selectedMethod
+
+// C#
+await camera.selectedMethod
+// or
+var value = await camera.selectedMethod
 
 ````
 - Connect()
@@ -119,14 +126,15 @@ const value = await camera.selectedMethod
 ## Camera Events
 ```bash
 # Python
-camera = CognexCamera(ip)
 camera.selectedEvent.append(yourCustomMethod)
 
 // JavaScript
-camera = new CognexCamera(ip)
 camera.selectedEvent.push(async (state) =>{
   console.log(state);
 });
+
+// C#
+camera.selectedEvent += yourEventHandler;
 ````
 - StateChanged
   - Fired when the camera state changes. 
