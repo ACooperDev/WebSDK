@@ -2,7 +2,6 @@
 TODO: standardize on event names and method names
 
 JS
-- events
 - methods
 
 Python
@@ -132,25 +131,25 @@ camera.selectedEvent.push(async (state) =>{
   console.log(state);
 });
 ````
-- on_state_changed
+- StateChanged
   - Fired when the camera state changes. 
-- on_result_changed
+- ResultsChanged
   - Fired when the session is ready and there is a new result.
-- on_liveMode_changed
+- LiveModeChanged
   - Fired when the cameras live mode is toggled.
-- on_job_changed
+- JobInfoChanged
   - Fired after any of the job values have changed in cam0/hmi/job. 
-- on_editorAttached
+- EditorAttachedChanged
   - Fired when ISVS editor has connected to a camera. 
-- on_jobLoading_changed
+- JobLoadingChanged
   - Fired after the job loading flag has changed. 
-- on_settings_changed
+- SettingsChanged
   - Fired after HMI value settings have changed. 
-- on_jobLoadFailed_changed
+- JobLoadFailed
   - Fired after a job load has failed.
-- on_jobValidationDone_changed
+- JobValidationDone
   - Fired after job validation has completed. 
-- on_sessionDisposed_changed
+- SessionDisposed
   - Fired when the HMI session has been disposed due to timeout or another disconnection type.
 
 # Python Overview
