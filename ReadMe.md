@@ -1,10 +1,10 @@
 # Cognex REST API Implementations (Unofficial)
-TODO: continue implementing useful methods
-- online_offline - rename to ToggleOnlineOffline() in python and js
 
 This is an independent project not affiliated with, endorsed by, or supported by Cognex Corporation.
 
 Implementations are in Python, JavaScript, and .NET with the goal of creating a standarized object, cognex_camera, across all three programming languages with a common set of properties, methods, and events.
+
+TODO: continue implementing useful methods
 
 [Python](#python-overview)
   - Ideal for scripts and automation tasks.
