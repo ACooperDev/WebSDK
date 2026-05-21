@@ -19,7 +19,7 @@ class CogSocket {
         this.onClose = null;
     }
 
-    connect() {
+    Connect() {
         return new Promise((resolve, reject) => {
             try {
                 this.websocket = new WebSocket(this.uri);
@@ -239,13 +239,13 @@ class CognexCamera {
         this.logger = (msg) => console.log(`[CogSocket] ${msg}`);
     }
 
-    async connect() {
+    async Connect() {
         const uri = `ws://${this.ip}:${this.port}/ws`;
         this.cogsock = new CogSocket(uri);
         this.cogsock.log = this.logger;
 
         // Connect Socket
-        await this.cogsock.connect();
+        await this.cogsock.Connect();
         
         // Open Session
         const sessionInfo = { cellNames: [this.cells] };
@@ -328,7 +328,7 @@ class CognexCamera {
     }
 
     async _onResultChanged(...args) {
-        this.ready()
+        this.SendReady()
         for (const cb of this.ResultsChanged ) {
             await cb(...args);
         }
@@ -382,7 +382,7 @@ class CognexCamera {
         }
     }
 
-    async disconnect() {
+    async Disconnect() {
         // Stop keep-alive timer
         if (this.keepAliveTimer) {
             clearInterval(this.keepAliveTimer);
@@ -410,11 +410,11 @@ class CognexCamera {
 
     // --- Camera API Methods ---
 
-    async manual_trigger() {
+    async ManualAcquire() {
         await this.cogsock.post(`${this.sessionId}/manualTrigger`, null);
     }
 
-    async live_mode(enabled) {
+    async SetLiveModeAsync(enabled) {
         await this.cogsock.put(`${this.sessionId}/liveMode`, enabled);
     }
 
@@ -425,98 +425,94 @@ class CognexCamera {
         await this.cogsock.put(`${this.sessionId}/softOnline`, newOnline);
     }
 
-    async query_check_cell_results(cell) {
+    async QueryCellResults(cell) {
         const resp = await this.cogsock.post(`${this.sessionId}/queryCellResults`, [[cell]]);
         return JSON.stringify(resp);
     }
 
-    async get_cell_expressions(cell) {
+    async GetCellExpression(cell) {
         const resp = await this.cogsock.post(`${this.sessionId}/getCellExpressions`, [cell, true]);
         return JSON.stringify(resp);
     }
 
-    async set_cell_expression(cell, expr) {
+    async SetCellExpression(cell, expr) {
         await this.cogsock.post(`${this.sessionId}/setCellExpression`, [cell, expr]);
     }
 
-    async set_cell_value(cell, value) {
+    async SetCellValue(cell, value) {
         await this.cogsock.post(`${this.sessionId}/setCellValue`, [cell, value]);
     }
 
-    async list_camera_files() {
+    async ListFiles() {
         const resp = await this.cogsock.post(`${this.sessionId}/listFiles`, []);
         return JSON.stringify(resp);
     }
 
-    async getInfo() {
+    async Info() {
         const resp = await this.cogsock.get(`${this.root}/info`);
         return JSON.stringify(resp);
     }
 
-    async find_state() {
+    async FindState() {
         const resp = await this.cogsock.get(`${this.root}/state`);
         return JSON.stringify(resp);
     }
 
-    async go_offline(status) {
-        await this.cogsock.put(`${this.sessionId}/softOnline`, false);
+    async SetSoftOnlineAsync(state) {
+        await this.cogsock.put(`${this.sessionId}/softOnline`, state);
     }
 
-    async go_online(status) {
-        await this.cogsock.put(`${this.sessionId}/softOnline`, true);
-    }
-
-    async get_jobinfo() {
+    async GetJobInfo() {
         const resp = await this.cogsock.get(`${this.root}/job`);
         return JSON.stringify(resp);
     }
 
-    async save_job(jobName) {
+    async SaveJob(jobName) {
         await this.cogsock.post(`${this.sessionId}/saveJob`, jobName);
     }
 
-    async load_job(jobName) {
+    async LoadJob(jobName) {
         await this.cogsock.post(`${this.sessionId}/loadJob`, jobName);
     }
 
-    async ready() {
+    async SendReady() {
         await this.cogsock.post(`${this.sessionId}/ready`, null);
     }
 
-    async session_IDs() {
+    async GetSessionIDs() {
         const resp = await this.cogsock.post(`${this.sessionId}/getSessionIDs`, null);
         return JSON.stringify(resp);
     }
 
-    async job_validation_state() {
+    async JobValidationState() {
         const resp = await this.cogsock.get(`${this.sessionId}/jobValidationState`);
         return JSON.stringify(resp);
     }
 
-    async system_validation_flag() {
+    async SystemValidationFlag() {
         const resp = await this.cogsock.get(`${this.sessionId}/systemValidationFlag`);
         return JSON.stringify(resp);
     }
  
-    async run_job_validation() {
+    async RunJobValidation() {
         await this.cogsock.post(`${this.sessionId}/runJobValidation`, null);
     }
 
-    async cancel_job_validation() {
+    async CancelJobValidation() {
         await this.cogsock.post(`${this.sessionId}/cancelJobValidation`, null);
     }
 
-    async get_keep_alive_interval() {
+    async GetKeepAliveTimeout() {
         const resp = await this.cogsock.get(`${this.root}/keepAliveTimeout`);
         return JSON.stringify(resp);
     }
 
-    async set_keep_alive_interval(intervalMs) {
+    async SetKeepAliveTimeout(intervalMs) {
         const resp = await this.cogsock.put(`${this.root}/keepAliveTimeout`, intervalMs);
         return JSON.stringify(resp);
     }
 
-    async load_image(fileObject) {
+    async LoadImage(fileObject) {
 
         const url =
             `http://${this.ip}:${this.port}/${this.sessionId}/loadImage`;
