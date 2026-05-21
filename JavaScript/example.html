@@ -266,7 +266,7 @@
             // Toggle online/offline
             if (!camera) return;
             try {
-                await camera.online_offline();
+                await camera.ToggleOnlineOffline();
             } catch (e) {
                 console.error('Failed to toggle online/offline mode:', e);
             }
