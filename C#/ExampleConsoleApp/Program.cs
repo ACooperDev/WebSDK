@@ -199,7 +199,7 @@ namespace myConsoleApp
 
         private async static void ResultsChanged(object? sender, EventArgs e)
         {
-            
+            /*
             Console.WriteLine("Results Changed Event");
             CvsInSight camera = sender as CvsInSight;
             await camera.SendReady();
@@ -214,7 +214,7 @@ namespace myConsoleApp
                 int value = myCell["data"].Value<int>();
                 Console.WriteLine(value.ToString());
             }
-            
+            */
         }
 
         private async static void LiveModeChanged(object? sencder, EventArgs e)
