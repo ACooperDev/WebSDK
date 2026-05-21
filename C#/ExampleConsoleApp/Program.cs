@@ -1,4 +1,4 @@
-﻿//dotnet add package Newtonsoft.Json
+//dotnet add package Newtonsoft.Json
 //dotnet add package WebSocketSharp.Standard --version 1.0.3
 
 using Cognex.InSight.Remoting.Serialization;
@@ -25,7 +25,6 @@ namespace myConsoleApp
             camera.JobLoadFailed += JobLoadFailed;
             camera.JobValidationDone += JobValidationComplete;
             camera.SessionDisposed += SessionDisposed;
-            camera.EditorAttachedChanged += InSight_EditorAttached;
 
             // Camera setup
             HmiSessionInfo sessionInfo = new HmiSessionInfo
@@ -182,7 +181,6 @@ namespace myConsoleApp
             camera.JobLoadFailed -= JobLoadFailed;
             camera.JobValidationDone -= JobValidationComplete;
             camera.SessionDisposed -= SessionDisposed;
-            camera.EditorAttachedChanged -= InSight_EditorAttached;
 
             await camera.Disconnect();
         }
@@ -201,7 +199,7 @@ namespace myConsoleApp
 
         private async static void ResultsChanged(object? sender, EventArgs e)
         {
-            /*
+            
             Console.WriteLine("Results Changed Event");
             CvsInSight camera = sender as CvsInSight;
             await camera.SendReady();
@@ -216,7 +214,7 @@ namespace myConsoleApp
                 int value = myCell["data"].Value<int>();
                 Console.WriteLine(value.ToString());
             }
-            */
+            
         }
 
         private async static void LiveModeChanged(object? sencder, EventArgs e)
@@ -257,15 +255,6 @@ namespace myConsoleApp
         private async static void SessionDisposed(object? sencder, EventArgs e)
         {
             //Console.WriteLine("SessionDisposed Event");
-        }
-
-        private static void InSight_EditorAttached(object? sender, EventArgs e)
-        {
-            /*
-            Console.WriteLine("Editor Attached Event");
-            CvsInSight inSight = sender as CvsInSight;
-            Console.WriteLine(inSight.EditorAttached.ToString());
-            */
         }
     }
 }
