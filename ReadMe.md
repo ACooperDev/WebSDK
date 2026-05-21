@@ -1,9 +1,6 @@
 # Cognex REST API Implementations (Unofficial)
-TODO: 
+TODO: continue implementing useful methods
 - online_offline - rename to ToggleOnlineOffline() in python and js
-- continue implementing useful methods
-
-
 
 This is an independent project not affiliated with, endorsed by, or supported by Cognex Corporation.
 
