@@ -1,9 +1,8 @@
 # Cognex REST API Implementations (Unofficial)
 TODO: 
-- online_offline - toggles softonline  maybe call it OnlineOffline
+- online_offline - rename to ToggleOnlineOffline() in python and js
 - continue implementing useful methods
-- add source code for Cognex.InSight.Web.dll
-- Winform?
+
 
 
 This is an independent project not affiliated with, endorsed by, or supported by Cognex Corporation.
