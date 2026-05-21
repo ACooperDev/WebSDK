@@ -1,8 +1,8 @@
 # Cognex REST API Implementations (Unofficial)
-TODO: standardize on event names and method names
+TODO: standardize on event names and method names 
 
-JS
-- methods
+online_offline - toggles softonline  maybe call it OnlineOffline
+FindState
 
 Python
 - events
@@ -320,6 +320,7 @@ if __name__ == "__main__":
                         camera = new CognexCamera(ip, 80, USER, PASS);
                         camera.cells = CELLS;
 
+                        //Event subscriptions
                         camera.StateChanged.push(async (state) => {
                             //console.log('[EVENT] Camera State Changed:', state);
                         });
@@ -350,11 +351,11 @@ if __name__ == "__main__":
                         //Example function
                         async function connectTriggerGetInfoDisconnect(){
                             try{
-                                await camera.connect();
-                                await camera.manual_trigger();
-                                const files = await camera.list_camera_files()
+                                await camera.Connect();
+                                await camera.ManualAcquire();
+                                const files = await camera.ListFiles()
                                 console.log(files)
-                                await camera.disconnect();
+                                await camera.Disconnect();
                             }catch (e) {
                                 console.log('Failure: ', e);
                             }
