@@ -184,14 +184,14 @@ async def main():
     camera = CognexCamera(ip='192.168.0.5')
 
     # Connect to the camera
-    await camera.connect()
-    await camera.ready()
+    await camera.Connect()
+    await camera.SendReady()
 
     # Trigger the camera
-    await camera.manual_trigger()
+    await camera.ManualAcquire()
 
     # Disconnect from the camera
-    await camera.disconnect()
+    await camera.Disconnect()
 
 if __name__ == "__main__":
     asyncio.run(main())
@@ -206,22 +206,22 @@ from cognex_camera import CognexCamera
 async def main():
     # Define a camera
     camera = CognexCamera(ip='192.168.0.5')
-    await camera.ready()
+    await camera.SendReady()
 
     # Connect to the camera
 
     # Option 1: Wait for response.  Application will not continue until the response has arrived or times out.
-    info = await camera.get_info()
+    info = await camera.Info()
     print(f"Camera Info: {info}")
 
     # Option 2: Fire and forget.  Application will continue without waiting for the respone to arrive.
-    asyncio.create_task(camera.get_info())
+    asyncio.create_task(camera.Info())
     print("Immediately continue without confirming the action is complete")
 
     # Option 3: Fire and sort of forget.  Application will continue immediately up until the await is requested.
     # If it is not complete by that point, the application will not continue until the response has arrived.
     # If it has completed by that point the application will continue on immediately.
-    task = asyncio.create_task(camera.get_info())
+    task = asyncio.create_task(camera.Info())
     # Run some logic
     value = await task
     print(f"Camera Info: {value}")
@@ -270,12 +270,12 @@ async def main():
     camera = CognexCamera(ip='192.168.0.74')
 
     # Subscribe to events
-    camera.on_state_changed.append(state_changed_handler)
+    camera.StateChanged.append(state_changed_handler)
 
     try:
         # Connect
-        await camera.connect()
-        await camera.ready()
+        await camera.Connect()
+        await camera.SendReady()
 
         # Loop
         while True:
@@ -291,7 +291,7 @@ async def main():
             
     finally:
         print("Disconnecting...")
-        await camera.disconnect()
+        await camera.Disconnect()
         print("Disconnected")
 
 if __name__ == "__main__":
