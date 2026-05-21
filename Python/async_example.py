@@ -98,7 +98,7 @@ async def main():
         """
         # Toggle online/offline
         print("Toggling online/offline...")
-        await camera.online_offline()
+        await camera.ToggleOnlineOffline()
         print("Online/offline toggled.")
         """
 
