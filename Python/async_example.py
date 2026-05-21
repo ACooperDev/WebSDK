@@ -10,19 +10,19 @@ async def main():
     try:
         # Connect
         print("Connecting to camera...")
-        await camera.connect()
-        await camera.ready()
+        await camera.Connect()
+        await camera.SendReady()
         print("Connected.")
 
         # Manual trigger
         print("Sending manual trigger...")
-        await camera.manual_trigger()
+        await camera.ManualAcquire()
         print("Manual trigger sent.")
 
         """     
         # Get info
         print("Getting camera info...")
-        info = await camera.get_info()
+        info = await camera.Info()
         print(f"Camera Info: {info}")
         infoData = json.loads(info)
         print(infoData["name"])
@@ -35,7 +35,7 @@ async def main():
         """
         # Find state
         print("Getting camera state...")
-        state = await camera.find_state()
+        state = await camera.FindState()
         print(f"Camera State: {state}")
         # Boolean for online/offline status
         stateData = json.loads(state)
@@ -45,53 +45,53 @@ async def main():
         """
         # List files
         print("Listing camera files...")
-        files = await camera.list_camera_files()
+        files = await camera.ListFiles()
         print(f"Camera Files: {files}")
         """
         
         """
         # Set cell expression and value
         print("Setting cell B16 expression and value...")
-        await camera.set_cell_expression('B16', 'EditInt(0,100)')
-        await camera.set_cell_value('B16', 42)
+        await camera.SetCellExpression('B16', 'EditInt(0,100)')
+        await camera.SetCellValue('B16', 42)
         print("Cell B16 expression and value set.")
         """
         
         """
         # Query cell results (example)
         print("Querying cell B16 results...")
-        results = await camera.query_check_cell_results('B16')
+        results = await camera.QueryCellResults('B16')
         print(f"Cell B16 Results: {results}")
         """
 
         """
         # Get cell expressions
         print("Getting cell B16 expression...")
-        expr = await camera.get_cell_expressions('B16')
+        expr = await camera.GetCellExpression('B16')
         print(f"Cell B16 Expression: {expr}")
         """
 
         """
         # Enable/disable live mode
         print("Going live...")
-        await camera.live_mode(True)
+        await camera.SetLiveModeAsync(True)
         print("Live mode enabled.")
         print("Going !live...")
-        await camera.live_mode(False)
+        await camera.SetLiveModeAsync(False)
         print("Live mode disabled.")
         """
         
         """
         # Go offline
         print("Going offline...")
-        await camera.go_offline()
+        await camera.SetSoftOnlineAsync(False)
         print("Camera is now offline.")
         """
         
         """
         # Go online
         print("Going online...")
-        await camera.go_online()
+        await camera.SetSoftOnlineAsync(True)
         print("Camera is now online.")
         """
         
@@ -105,7 +105,7 @@ async def main():
         """
         # Current job info
         print("Getting current job info...")
-        jobInfo = await camera.get_jobinfo()
+        jobInfo = await camera.GetJobInfo()
         print(f"Job Info: {jobInfo}")
         jobInfoData = json.loads(jobInfo)
         print(jobInfoData["name"])
@@ -114,72 +114,72 @@ async def main():
         """
         # Save job
         print("Saving current job...")
-        await camera.save_job("MyJob5.jobx")
+        await camera.SaveJob("MyJob5.jobx")
         print("Job has been saved.")
         """
 
         """
         # Load job
         print("Loading job...")
-        await camera.load_job("MyJob2.jobx")
+        await camera.LoadJob("MyJob3.jobx")
         print("Job has been loaded.")
         """
 
         """
         # Send ready
         print("Sending ready...")
-        await camera.ready()
+        await camera.SendReady()
         print("Ready sent.")
         """
 
         """
         # Get session IDs        
         print("Getting session IDs...")
-        sessionIDs = await camera.session_IDs() 
+        sessionIDs = await camera.GetSessionIDs() 
         print(f"Session IDs: {sessionIDs}")
         """
 
         """
         # Get job validation state
         print("Getting job validation state...")  
-        jobValidationState = await camera.job_validation_state()
+        jobValidationState = await camera.JobValidationState()
         print(f"Job Validation State: {jobValidationState}")
         """
         
         """
         # Get system validation flag        
         print("Getting system validation flag...")  
-        systemValidationFlag = await camera.system_validation_flag()
+        systemValidationFlag = await camera.SystemValidationFlag()
         print(f"System Validation Flag: {systemValidationFlag}")    
         """
         
         """
         # Run job validation
         print("Running job validation...")
-        await camera.run_job_validation()
+        await camera.RunJobValidation()
         print("Job validation run.")
         """
         
         """
         # Cancel job validation
         print("Canceling job validation...")
-        await camera.cancel_job_validation()
+        await camera.CancelJobValidation()
         print("Job validation canceled.")
         """
 
         """
         # Get/set keep alive interval
         print("Getting keep alive interval...")
-        keepAliveInterval = await camera.get_keep_alive_interval()
+        keepAliveInterval = await camera.GetKeepAliveTimeout()
         print(f"Keep Alive Interval: {keepAliveInterval} ms")
         print("Setting keep alive interval to 50 ms...")
-        await camera.set_keep_alive_interval(50)
+        await camera.SetKeepAliveTimeout(50)
         """
 
         """
         # Load image
         print("Loading image...")
-        await camera.load_image(r"C:\test\myImage.bmp", "myImage")
+        await camera.LoadImage(r"C:\test\myImage.bmp", "myImage")
         print("Image loaded.")
         """
     
@@ -187,7 +187,7 @@ async def main():
     finally:
         # Disconnect
         print("Disconnecting...")
-        await camera.disconnect()
+        await camera.Disconnect()
         print("Disconnected.")
 
 if __name__ == "__main__":
