@@ -1,7 +1,6 @@
 # Cognex REST API Implementations (Unofficial)
 TODO: 
 - online_offline - toggles softonline  maybe call it OnlineOffline
-- FindState
 - continue implementing useful methods
 - add source code for Cognex.InSight.Web.dll
 - Winform?
