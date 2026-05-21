@@ -418,7 +418,7 @@ class CognexCamera {
         await this.cogsock.put(`${this.sessionId}/liveMode`, enabled);
     }
 
-    async online_offline() {
+    async ToggleOnlineOffline() {
         let resp = await this.cogsock.get(`${this.sessionId}/softOnline`);
         let currentOnline = typeof resp === 'boolean' ? resp : false;
         let newOnline = !currentOnline;
