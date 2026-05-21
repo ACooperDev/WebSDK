@@ -320,25 +320,28 @@ if __name__ == "__main__":
                         camera = new CognexCamera(ip, 80, USER, PASS);
                         camera.cells = CELLS;
 
-                        //Event subscriptions
-                        camera.on_state_changed.push(async (state) => {
-                        //console.log('[EVENT] Camera State Changed:', state);
+                        camera.StateChanged.push(async (state) => {
+                            //console.log('[EVENT] Camera State Changed:', state);
                         });
-
-                        camera.on_result_changed.push(async (results) => {
-                        //console.log('[EVENT] Results Changed:', results);
+            
+                        camera.ResultsChanged.push(async (results) => {
+                            //console.log('[EVENT] Results Changed:', results);
                         });
-
-                        camera.onLiveModeChanged.push(async (isLive) => {
-                        //console.log('[EVENT] Live Mode Changed:', isLive);
+            
+                        camera.LiveModeChanged.push(async (isLive) => {
+                            //console.log('[EVENT] Live Mode Changed:', isLive);
                         });
-
-                        camera.onJobChanged.push(async (jobName) => {
-                        //console.log('[EVENT] Job Changed:', jobName);
+            
+                        camera.JobInfoChanged.push(async (jobName) => {
+                            //console.log('[EVENT] Job Changed:', jobName);
                         });
-
-                        camera.onEditorAttached.push(async () => {
-                        //console.log('[EVENT] Editor Attached');
+            
+                        camera.EditorAttachedChanged.push(async () => {
+                            //console.log('[EVENT] Editor Attached');
+                        });
+            
+                        camera.JobValidationDone.push(async () => {
+                            //console.log('[EVENT] Job Validation Done');
                         });
 
                         connectTriggerGetInfoDisconnect();
