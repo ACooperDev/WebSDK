@@ -170,6 +170,7 @@ pip install websockets
 ```bash
 pip install httpx
 ```
+cognex_camera can be built/modified from [here.](Python/)
   
 ## Python Getting Started
 
@@ -302,6 +303,8 @@ if __name__ == "__main__":
   - `CogSocket`
   - `CognexCamera`
 - `example.html` is an example emplementation of `cognex_camera.js`
+
+cognex_camera can be built/modified from [here.](JavaScript/)
 
 ## JavaScript Getting Started
 ```html
