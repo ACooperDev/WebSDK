@@ -224,16 +224,16 @@ class CognexCamera {
         this.cells = 'A0:Z100';
         
         // Event subscriber lists
-        this.on_state_changed = [];
-        this.on_result_changed = [];
-        this.onLiveModeChanged = [];
-        this.onJobChanged = [];
-        this.onEditorAttached = [];
-        this.onJobLoadingChanged = [];
-        this.onSettingsChanged = [];
-        this.onJobLoadFailed = [];
-        this.onJobValidationDone = [];
-        this.onSessionDisposed = [];
+        this.StateChanged = [];
+        this.ResultsChanged = [];
+        this.LiveModeChanged = [];
+        this.JobInfoChanged = [];
+        this.EditorAttachedChanged = [];
+        this.JobLoadingChanged = [];
+        this.SettingsChanged = [];
+        this.JobLoadFailed = [];
+        this.JobValidationDone = [];
+        this.SessionDisposed = [];
 
         // Initialize logging (optional)
         this.logger = (msg) => console.log(`[CogSocket] ${msg}`);
@@ -322,62 +322,62 @@ class CognexCamera {
 
     // Events
     async _onStateChanged(...args) {
-        for (const cb of this.on_state_changed) {
+        for (const cb of this.StateChanged) {
             await cb(args);
         }
     }
 
     async _onResultChanged(...args) {
         this.ready()
-        for (const cb of this.on_result_changed ) {
+        for (const cb of this.ResultsChanged ) {
             await cb(...args);
         }
     }
     
     async _onLiveModeChanged(...args) {
-        for (const cb of this.onLiveModeChanged) {
+        for (const cb of this.LiveModeChanged) {
             await cb(...args);
         }
     }
 
     async _onJobChanged(...args) {
-        for (const cb of this.onJobChanged) {
+        for (const cb of this.JobInfoChanged) {
             await cb(...args);
         }
     }
 
     async _onEditorAttached(...args) {
-        for (const cb of this.onEditorAttached) {
+        for (const cb of this.EditorAttachedChanged) {
             await cb(...args);
         }
     }
 
     async _onJobLoading_changed(...args) {
-        for (const cb of this.onJobLoadingChanged) {
+        for (const cb of this.JobLoadingChanged) {
             await cb(...args);
         }
     }
     
     async _onSettingsChanged(...args) {
-        for (const cb of this.onSettingsChanged) {
+        for (const cb of this.SettingsChanged) {
             await cb(...args);
         }
     }
     
     async _onJobLoadFailed_changed(...args) {
-        for (const cb of this.onJobLoadFailed) {
+        for (const cb of this.JobLoadFailed) {
             await cb(...args);
         }
     }
   
     async _onJobValidationDone_changed(...args) {
-        for (const cb of this.onJobValidationDone) {
+        for (const cb of this.JobValidationDone) {
             await cb(...args);
         }
     }
     
     async _onSessionDisposed_changed(...args) {
-        for (const cb of this.onSessionDisposed) {
+        for (const cb of this.SessionDisposed) {
             await cb(...args);
         }
     }
