@@ -381,7 +381,7 @@ dotnet add package WebSocketSharp.Standard --version 1.0.3
 ```
 
 ## .NET C# Getting Started
-```bash
+```csharp
 using Cognex.InSight.Remoting.Serialization;
 using Cognex.InSight.Web;
 using Newtonsoft.Json;
