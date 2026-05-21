@@ -173,7 +173,7 @@ pip install httpx
   
 ## Python Getting Started
 
-```bash
+```python
 import asyncio
 import json
 from cognex_camera import CognexCamera
@@ -197,7 +197,7 @@ if __name__ == "__main__":
 ```
 ## Python asyncio Options
 
-```bash
+```python
 import asyncio
 import json
 from cognex_camera import CognexCamera
@@ -231,7 +231,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 ## Python Recommendation
-```bash
+```python
 # Add Try/Except to all method calls.
 # Example
 try:
@@ -242,7 +242,7 @@ except Exception as e:
 
 
 ## Python Example Event Subscription
-```bash
+```python
 import asyncio
 import json
 from cognex_camera import CognexCamera
@@ -304,7 +304,7 @@ if __name__ == "__main__":
 - `example.html` is an example emplementation of `cognex_camera.js`
 
 ## JavaScript Getting Started
-```bash
+```html
 <html>
     <body>
             <script src="cognex_camera.js"></script>
