@@ -105,23 +105,23 @@ async def main():
     camera = CognexCamera(ip='192.168.0.74')
 
     # Subscribe to events
-    camera.on_state_changed.append(state_changed_handler)
-    camera.on_result_changed.append(result_changed_handler)
-    camera.on_liveMode_changed.append(liveMode_changed_handler)
-    camera.on_job_changed.append(job_changed_handler)
-    camera.on_editorAttached.append(editorAttached_handler)
-    camera.on_jobLoading_changed.append(jobLoading_changed_handler)
-    camera.on_settings_changed.append(settings_changed_handler)
-    camera.on_jobLoadFailed.append(jobLoadFailed_handler)
-    camera.on_jobValidationDone.append(jobValidationDone_handler)
-    camera.on_sessionDisposed.append(sessionDisposed_handler)
+    camera.StateChanged.append(state_changed_handler)
+    camera.ResultsChanged.append(result_changed_handler)
+    camera.LiveModeChanged.append(liveMode_changed_handler)
+    camera.JobInfoChanged.append(job_changed_handler)
+    camera.EditorAttachedChanged.append(editorAttached_handler)
+    camera.JobLoadingChanged.append(jobLoading_changed_handler)
+    camera.SettingsChanged.append(settings_changed_handler)
+    camera.JobLoadFailed.append(jobLoadFailed_handler)
+    camera.JobValidationDone.append(jobValidationDone_handler)
+    camera.SessionDisposed.append(sessionDisposed_handler)
 
     try:
         # Connect
         print("Connecting to camera...")
-        await camera.connect()
+        await camera.Connect()
         print("Connected.")
-        await camera.ready()
+        await camera.SendReady()
         print ("Ready sent.")
 
         # Loop
@@ -129,7 +129,7 @@ async def main():
             async with state_lock:
                 
                 if state.settings_changed:
-                    #print("MAIN saw settings change:", state.last_settings_result)
+                    # print("MAIN saw settings change:", state.last_settings_result)
                     state.settings_changed = False
                     
                 if state.jobValidationDone:
@@ -165,7 +165,8 @@ async def main():
                     state.jobLoading_changed = False
                     
                 if state.result_changed:
-                    await camera.ready()
+                    """
+                    await camera.SendReady()
                     # print("MAIN saw result:", state.last_result)
                     state.result_changed = False
                     
@@ -180,10 +181,11 @@ async def main():
                             None
                         )
 
-                        # print("Value at B16:", value)
+                        #print("Value at B16:", value)
 
                     except (TypeError, KeyError, IndexError):
                         print("Value at B16: None")  
+                    """
                         
             # Don't hammer your CPU, a sleep will not miss events, no matter how long it is.
             # All events will be queued and dequeued in order.
@@ -191,7 +193,7 @@ async def main():
             
     finally:
         print("Disconnecting...")
-        await camera.disconnect()
+        await camera.Disconnect()
         print("Disconnected")
 
 if __name__ == "__main__":
