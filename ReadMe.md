@@ -344,6 +344,7 @@ if __name__ == "__main__":
                             //console.log('[EVENT] Job Validation Done');
                         });
 
+                        //Example calling function
                         connectTriggerGetInfoDisconnect();
 
                         //Example function
@@ -356,7 +357,6 @@ if __name__ == "__main__":
                                 await camera.disconnect();
                             }catch (e) {
                                 console.log('Failure: ', e);
-
                             }
                         }
             </script>
