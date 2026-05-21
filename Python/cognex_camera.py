@@ -140,18 +140,18 @@ class CognexCamera:
         self.cells = 'A0:Z100'
         
         # Event subscriber lists
-        self.on_state_changed = []
-        self.on_result_changed = []
-        self.on_liveMode_changed = []
-        self.on_job_changed = []
-        self.on_editorAttached = []
-        self.on_jobLoading_changed = []
-        self.on_settings_changed = []
-        self.on_jobLoadFailed = []
-        self.on_jobValidationDone = []
-        self.on_sessionDisposed = []
+        self.StateChanged = []
+        self.ResultsChanged = []
+        self.LiveModeChanged = []
+        self.JobInfoChanged = []
+        self.EditorAttachedChanged = []
+        self.JobLoadingChanged = []
+        self.SettingsChanged = []
+        self.JobLoadFailed = []
+        self.JobValidationDone = []
+        self.SessionDisposed = []
 
-    async def connect(self):
+    async def Connect(self):
         uri = f"ws://{self.ip}:{self.port}/ws"
         self.cogsock = CogSocket(uri)
         #self.cogsock.log = lambda msg: print(f"[CogSocket] {msg}")
@@ -192,73 +192,73 @@ class CognexCamera:
         #print("State changed")
 
         # ONLY callbacks
-        for cb in self.on_state_changed:
+        for cb in self.StateChanged:
             await cb(*args)
 
     async def _on_result_changed(self, *args):
         #print("Result changed")
 
         # ONLY callbacks
-        for cb in self.on_result_changed:
+        for cb in self.ResultsChanged:
             await cb(*args)
             
     async def _on_liveMode_changed(self, *args):
         #print("Live mode changed")
 
         # ONLY callbacks
-        for cb in self.on_liveMode_changed:
+        for cb in self.LiveModeChanged:
             await cb(*args)
 
     async def _on_job_changed(self, *args):
         #print("Job changed")
 
         # ONLY callbacks
-        for cb in self.on_job_changed:
+        for cb in self.JobInfoChanged:
             await cb(*args)
 
     async def _on_editorAttached(self, *args):
         #print("Editor attached")
 
         # ONLY callbacks
-        for cb in self.on_editorAttached:
+        for cb in self.EditorAttachedChanged:
             await cb(*args)
 
     async def _on_jobLoading_changed(self, *args):
         #print("Job loading changed")
 
         # ONLY callbacks
-        for cb in self.on_jobLoading_changed:
+        for cb in self.JobLoadingChanged:
             await cb(*args)
             
     async def _on_settings_changed(self, *args):
         # print("Settings changed")
 
         # ONLY callbacks
-        for cb in self.on_settings_changed:
+        for cb in self.SettingsChanged:
             await cb(*args)           
             
     async def _on_jobLoadFailed_changed(self, *args):
         # print("Job load failed")
 
         # ONLY callbacks
-        for cb in self.on_jobLoadFailed:
+        for cb in self.JobLoadFailed:
             await cb(*args)
   
     async def _on_jobValidationDone_changed(self, *args):
         # print("Job validation done")
 
         # ONLY callbacks
-        for cb in self.on_jobValidationDone:
+        for cb in self.JobValidationDone:
             await cb(*args)          
             
     async def _on_sessionDisposed_changed(self, *args):
         # print("Session disposed")
 
         # ONLY callbacks
-        for cb in self.on_sessionDisposed:
+        for cb in self.SessionDisposed:
             await cb(*args)
 
-    async def disconnect(self):
+    async def Disconnect(self):
         try:
             # Stop keep-alive first
             if self.keep_alive_task:
@@ -285,10 +285,10 @@ class CognexCamera:
             self.session_id = None
 
     # Camera functions
-    async def manual_trigger(self):
+    async def ManualAcquire(self):
         await self.cogsock.post(f"{self.session_id}/manualTrigger", "")
 
-    async def live_mode(self, enabled: bool):
+    async def SetLiveModeAsync(self, enabled: bool):
         await self.cogsock.put(f"{self.session_id}/liveMode", enabled)
 
     async def online_offline(self):
@@ -297,78 +297,75 @@ class CognexCamera:
         new_online = not current_online
         await self.cogsock.put(f"{self.session_id}/softOnline", new_online)
 
-    async def query_check_cell_results(self, cell):
+    async def QueryCellResults(self, cell):
         resp = await self.cogsock.post(f"{self.session_id}/queryCellResults", [[cell]])
         return json.dumps(resp)
 
-    async def get_cell_expressions(self, cell):
+    async def GetCellExpression(self, cell):
         resp = await self.cogsock.post(f"{self.session_id}/getCellExpressions", [cell, True])
         return json.dumps(resp)
 
-    async def set_cell_expression(self, cell, expr):
+    async def SetCellExpression(self, cell, expr):
         await self.cogsock.post(f"{self.session_id}/setCellExpression", [cell, expr])
 
-    async def set_cell_value(self, cell, value):
+    async def SetCellValue(self, cell, value):
         await self.cogsock.post(f"{self.session_id}/setCellValue", [cell, value])
 
-    async def list_camera_files(self):
+    async def ListFiles(self):
         resp = await self.cogsock.post(f"{self.session_id}/listFiles", [])
         return json.dumps(resp)
 
-    async def get_info(self):
+    async def Info(self):
         resp = await self.cogsock.get(f"{self.root}/info")
         return json.dumps(resp)
 
-    async def find_state(self):
+    async def FindState(self):
         resp = await self.cogsock.get(f"{self.root}/state")
         return json.dumps(resp)
 
-    async def go_online(self):
-        await self.cogsock.put(f"{self.session_id}/softOnline", True)
+    async def SetSoftOnlineAsync(self, enabled: bool):
+        await self.cogsock.put(f"{self.session_id}/softOnline", enabled)
 
-    async def go_offline(self):
-        await self.cogsock.put(f"{self.session_id}/softOnline", False)
-
-    async def get_jobinfo(self):
+    async def GetJobInfo(self):
         resp = await self.cogsock.get(f"{self.root}/job")
         return json.dumps(resp)
     
-    async def save_job(self, job_name):
+    async def SaveJob(self, job_name):
         await self.cogsock.post(f"{self.session_id}/saveJob", job_name)
 
-    async def load_job(self, job_name):
+    async def LoadJob(self, job_name):
         await self.cogsock.post(f"{self.session_id}/loadJob", job_name)
 
-    async def ready(self):
+    async def SendReady(self):
         await self.cogsock.post(f"{self.session_id}/ready", "")
 
-    async def session_IDs(self):
+    async def GetSessionIDs(self):
         resp = await self.cogsock.post(f"{self.session_id}/getSessionIDs", "")
         return json.dumps(resp)
 
-    async def job_validation_state(self):
+    async def JobValidationState(self):
         resp = await self.cogsock.get(f"{self.session_id}/jobValidationState")
         return json.dumps(resp)
     
-    async def system_validation_flag(self):
+    async def SystemValidationFlag(self):
         resp = await self.cogsock.get(f"{self.session_id}/systemValidationFlag")
         return json.dumps(resp)
     
-    async def run_job_validation(self):
+    async def RunJobValidation(self):
         await self.cogsock.post(f"{self.session_id}/runJobValidation", "")
         
-    async def cancel_job_validation(self):
+    async def CancelJobValidation(self):
         await self.cogsock.post(f"{self.session_id}/cancelJobValidation", "")
 
-    async def get_keep_alive_interval(self):
+    async def GetKeepAliveTimeout(self):
         resp = await self.cogsock.get(f"{self.root}/keepAliveTimeout")
         return json.dumps(resp)
     
-    async def set_keep_alive_interval(self, interval_ms):
+    async def SetKeepAliveTimeout(self, interval_ms):
         resp = await self.cogsock.put(f"{self.root}/keepAliveTimeout", interval_ms)
         return json.dumps(resp)
 
-    async def load_image(self, filename, image_name=None):
+    async def LoadImage(self, filename, image_name=None):
 
         # Read file as bytes
         with open(filename, "rb") as f:
