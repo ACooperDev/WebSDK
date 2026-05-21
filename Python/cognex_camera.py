@@ -291,7 +291,7 @@ class CognexCamera:
     async def SetLiveModeAsync(self, enabled: bool):
         await self.cogsock.put(f"{self.session_id}/liveMode", enabled)
 
-    async def online_offline(self):
+    async def ToggleOnlineOffline(self):
         resp = await self.cogsock.get(f"{self.session_id}/softOnline")
         current_online = resp if isinstance(resp, bool) else False
         new_online = not current_online
