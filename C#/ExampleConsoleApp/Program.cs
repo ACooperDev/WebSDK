@@ -166,6 +166,12 @@ namespace myConsoleApp
             camera.LoadImage(@"C:\test\myImage.bmp");
             */
 
+            /*
+            Console.WriteLine("Getting camera state");
+            JToken myState = await camera.FindState();
+            Console.WriteLine(myState);
+            */
+
             // Keep console app alive so events can happen
             Console.WriteLine("Press ENTER to exit");
             Console.ReadLine();
@@ -191,8 +197,8 @@ namespace myConsoleApp
         {
             /*
             Console.WriteLine("State Changed Event");
-            CvsInSight inSight = sender as CvsInSight;
-            JToken myState = await inSight.FindState();
+            CvsInSight camera = sender as CvsInSight;
+            JToken myState = await camera.FindState();
             Console.WriteLine(myState);
             */
         }
