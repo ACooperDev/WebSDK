@@ -75,7 +75,7 @@ var value = await camera.selectedMethod
   - Manually triggers an acquisition. 
 - SetLiveModeAsync(bool)
   - Enables or disables live mode.
-- online_offline()
+- ToggleOnlineOffline()
   - Toggles to the opposite online state. 
 - QueryCellResults(cell: str)
   - Query cells results
