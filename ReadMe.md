@@ -117,8 +117,8 @@ var value = await camera.selectedMethod
   - Sets the session timeout interval.
 - LoadImage(imagePath: str, imageName: str)
   - Loads an image from disk to the camera.
-- NMC(NMC: str, timeout: double, port: int, IP: str, username: str, password: str)
-  - Sends a Native Mode Command 
+- NMC(nmc: str, timeout: double, port: int, IP: str, username: str, password: str)
+  - Sends a Native Mode Command.  Python and C# only.
 
 ## Camera Events
 ```bash
