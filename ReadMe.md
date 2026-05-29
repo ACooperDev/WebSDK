@@ -4,7 +4,7 @@ This is an independent project not affiliated with, endorsed by, or supported by
 
 Implementations are in Python, JavaScript, and .NET with the goal of creating a standarized object, cognex_camera, across all three programming languages with a common set of properties, methods, and events.
 
-TODO: NMC, continue implementing useful methods
+TODO: continue implementing useful methods
 
 [Python](#python-overview)
   - Ideal for scripts and automation tasks.
@@ -117,7 +117,7 @@ var value = await camera.selectedMethod
   - Sets the session timeout interval.
 - LoadImage(imagePath: str, imageName: str)
   - Loads an image from disk to the camera.
-- NMC(nmc: str, timeout: double, port: int, IP: str, username: str, password: str)
+- NMC(nmc: str, timeout: double, port: int, ip: str, username: str, password: str)
   - Sends a Native Mode Command.  Python and C# only.
 
 ## Camera Events
