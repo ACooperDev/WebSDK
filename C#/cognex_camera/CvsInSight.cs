@@ -1650,7 +1650,7 @@ namespace Cognex.InSight.Web
         /// 
         /// </summary>
         /// <returns></returns>
-        public string SendNMC(string nmc, double timeout, int port, string ipAddress, string username, string password)
+        public string NMC(string nmc, double timeout, int port, string ipAddress, string username, string password)
         {
             string result;
             string server = ipAddress.Split(':')[0];
