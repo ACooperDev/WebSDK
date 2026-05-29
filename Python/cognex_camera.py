@@ -366,7 +366,6 @@ class CognexCamera:
         return json.dumps(resp)
 
     async def LoadImage(self, filename, image_name=None):
-
         # Read file as bytes
         with open(filename, "rb") as f:
             bytes_data = f.read()
@@ -383,3 +382,40 @@ class CognexCamera:
 
             # EnsureSuccessStatusCode()
             resp.raise_for_status()
+
+    def NMC(self, nmc, timeout, port, ip, username, password):
+        sock = socket.create_connection((ip, port))
+        sock.settimeout(timeout)
+
+        # Read initial data
+        data = sock.recv(4096)
+        # print(repr(data.decode('ascii', errors='ignore')))
+
+        # Login
+        sock.sendall((username + "\r\n" + password + "\r\n").encode("ascii"))
+
+        time.sleep(timeout)
+
+        # Read response
+        data = sock.recv(4096)
+        # print(repr(data.decode('ascii', errors='ignore')))
+
+        # Send command
+        sock.sendall((nmc + "\r\n").encode("ascii"))
+
+        time.sleep(timeout)
+
+        # Read response
+        response = ""
+        while True:
+            try:
+                data = sock.recv(4096)
+                if not data:
+                    break
+                response += data.decode('ascii', errors='ignore')
+            except socket.timeout:
+                break
+            
+        sock.close()   
+        
+        return response
