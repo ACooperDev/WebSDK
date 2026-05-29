@@ -1645,7 +1645,11 @@ namespace Cognex.InSight.Web
             Boolean resp = Convert.ToBoolean(await _cogSocket.GetAsync(_sessionIDPath + _softOnlinePath));
             var temp = await _cogSocket.PutAsync(_sessionIDPath + _softOnlinePath, !resp);
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string SendNMC(string nmc, double timeout, int port, string ipAddress, string username, string password)
         {
             string result;
