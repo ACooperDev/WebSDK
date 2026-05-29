@@ -1646,6 +1646,61 @@ namespace Cognex.InSight.Web
             var temp = await _cogSocket.PutAsync(_sessionIDPath + _softOnlinePath, !resp);
         }
 
+        public string SendNMC(string nmc, double timeout, int port, string ipAddress, string username, string password)
+        {
+            string result;
+            string server = ipAddress.Split(':')[0];
+
+            try
+            {
+                using (TcpClient client = new TcpClient(server, port))
+                using (NetworkStream stream = client.GetStream())
+                using (StreamReader reader = new StreamReader(stream, Encoding.ASCII))
+                using (StreamWriter writer = new StreamWriter(stream, Encoding.ASCII) { AutoFlush = true })
+                {
+                    // Read server's request for username
+                    string request = reader.ReadLine();
+
+                    // Send username and password
+                    string login = username + "\r\n" + password + "\r\n";
+                    writer.Write(login);
+
+                    // Read server's response
+                    request = null;
+                    request = reader.ReadLine();
+
+                    // Send NMC
+                    writer.Write(nmc + "\r\n");
+                    request = null;
+                    // Read NMC response
+                    try
+                    {
+                        // Set timeout
+                        stream.ReadTimeout = (int)timeout;
+
+                        string temp;
+                        while ((temp = reader.ReadLine()) != null)
+                        {
+                            request = request + " " + temp + "\r\n";
+                            Console.WriteLine("Server: " + request);
+                        }
+                    }
+                    catch (IOException ex)
+                    {
+                        result = "fail";
+                        // Console.WriteLine("IOException occurred: " + ex.Message);
+                    }
+
+                    result = request;
+                }
+            }
+            catch (Exception e)
+            {
+                result = "fail";
+                // Console.WriteLine("Exception: " + e.Message);
+            }
+            return result;
+        }
 
 
     }
