@@ -177,6 +177,12 @@ namespace myConsoleApp
             Console.WriteLine("Toggling soft online state");
             await camera.ToggleOnlineOffline();
             */
+
+            /*
+            Console.WriteLine("Sending GI NMC");
+            string result = camera.NMC("GI", 500, 23, camera.RemoteIPAddress, camera.Username, camera.Password);
+            Console.WriteLine(result);
+            */
             
             // Keep console app alive so events can happen
             Console.WriteLine("Press ENTER to exit");
