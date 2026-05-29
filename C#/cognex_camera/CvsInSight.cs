@@ -1686,7 +1686,7 @@ namespace Cognex.InSight.Web
                         while ((temp = reader.ReadLine()) != null)
                         {
                             request = request + " " + temp + "\r\n";
-                            Console.WriteLine("Server: " + request);
+                            // Console.WriteLine("Server: " + request);
                         }
                     }
                     catch (IOException ex)
