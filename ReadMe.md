@@ -116,7 +116,9 @@ var value = await camera.selectedMethod
 - SetKeepAliveTimeout(value)
   - Sets the session timeout interval.
 - LoadImage(imagePath: str, imageName: str)
-  - Loads an image from disk to the camera. 
+  - Loads an image from disk to the camera.
+- NMC(NMC: str, timeout: double, port: int, IP: str, username: str, password: str)
+  - Sends a Native Mode Command 
 
 ## Camera Events
 ```bash
