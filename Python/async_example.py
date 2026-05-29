@@ -182,7 +182,12 @@ async def main():
         await camera.LoadImage(r"C:\test\myImage.bmp", "myImage")
         print("Image loaded.")
         """
-    
+        
+        """
+        print("Sending GI NMC")
+        nmcResponse = camera.NMC("GI", 0.250, 23, camera.ip, camera.username, camera.password)
+        print(f"NMC Response: {nmcResponse}")
+        """
         
     finally:
         # Disconnect
