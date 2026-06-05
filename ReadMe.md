@@ -4,7 +4,7 @@ This is an independent project not affiliated with, endorsed by, or supported by
 
 Implementations are in Python, JavaScript, and .NET with the goal of creating a standarized object, cognex_camera, across all three programming languages with a common set of properties, methods, and events.
 
-TODO: continue implementing useful methods
+TODO: continue implementing useful methods.  startupJob, startupOnline
 
 [Python](#python-overview)
   - Ideal for scripts and automation tasks.
