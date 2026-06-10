@@ -4,6 +4,8 @@ import json
 import websockets
 import logging
 import httpx
+import socket
+import time
 
 class CogSocket:
     def __init__(self, websocket_uri, root=None):
