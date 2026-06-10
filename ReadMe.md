@@ -21,7 +21,7 @@ TODO: continue implementing useful methods.  getStartupJob (JS done), setStartup
 # Python
 camera = CognexCamera(ip, optionalProperties)
 ```
-```javascrtip
+```javascript
 // JavaScript
 camera = new CognexCamera(ip, optionalProperties)
 ```
@@ -58,7 +58,7 @@ await camera.selectedMethod
 # or
 value = await camera.selectedMethod
 ```
-```javascrtip
+```js
 // JavaScript
 await camera.selectedMethod
 // or
@@ -133,7 +133,7 @@ var value = await camera.selectedMethod
 # Python
 camera.selectedEvent.append(yourCustomMethod)
 ```
-```javascript
+```js
 // JavaScript
 camera.selectedEvent.push(async (state) =>{
   console.log(state);
