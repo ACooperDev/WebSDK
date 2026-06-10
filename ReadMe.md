@@ -13,7 +13,7 @@ TODO: continue implementing useful methods.  startupJob, startupOnline, setCellC
   - Optimized for lightweight control panels and dashboards.
 
 [C# .NET](#net-c-getting-started)
-  - Perfect for industiral HMI apps, SCADA, and WinForms/WPF.
+  - Perfect for industrial HMI apps, SCADA, and WinForms/WPF.
 
 # cognex_camera (.py, .js, .cs)
 ## Camera Properties
