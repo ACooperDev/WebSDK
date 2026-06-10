@@ -179,7 +179,7 @@ async def main():
         """
         # Load image
         print("Loading image...")
-        await camera.LoadImage(r"C:\test\myImage.bmp", "myImage")
+        await camera.LoadImage(r"C:\\test\\myImage.bmp", "myImage")
         print("Image loaded.")
         """
         
