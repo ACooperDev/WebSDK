@@ -17,13 +17,15 @@ TODO: continue implementing useful methods.  getStartupJob (JS done), setStartup
 
 # cognex_camera (.py, .js, .cs)
 ## Camera Properties
-```bash
+```python
 # Python
 camera = CognexCamera(ip, optionalProperties)
-
+```
+```javascrtip
 // JavaScript
 camera = new CognexCamera(ip, optionalProperties)
-
+```
+```csharp
 // C#
 CvsInSight camera = new CvsInsight();
 camera.Connect(ip, optionalProperties);
@@ -50,17 +52,19 @@ camera.Connect(ip, optionalProperties);
     - Defaulted 'A0:Z100' 
   
 ## Camera Methods
-```bash
+```python
 # Python
 await camera.selectedMethod
 # or
 value = await camera.selectedMethod
-
+```
+```javascrtip
 // JavaScript
 await camera.selectedMethod
 // or
 const value = await camera.selectedMethod
-
+```
+```csharp
 // C#
 await camera.selectedMethod
 // or
