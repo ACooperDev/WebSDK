@@ -42,7 +42,6 @@ class CogSocket:
             if self.onclose:
                 self.onclose()
 
-    # I don't think I actually need this. ------------------------------------------------------------------------------------
     async def _handle_message(self, message):
         if self.log:
             self.log(f"Received: {message}")
