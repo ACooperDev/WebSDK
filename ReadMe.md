@@ -4,7 +4,7 @@ This is an independent project not affiliated with, endorsed by, or supported by
 
 Implementations are in Python, JavaScript, and .NET with the goal of creating a standarized object, cognex_camera, across all three programming languages with a common set of properties, methods, and events.
 
-TODO: continue implementing useful methods.  startupJob, startupOnline, setCellConcition
+TODO: continue implementing useful methods.  getStartupJob (JS done), setStartupJob(JS done), startupOnline, setCellConcition
 
 [Python](#python-overview)
   - Ideal for scripts and automation tasks.
@@ -119,6 +119,10 @@ var value = await camera.selectedMethod
   - Loads an image from disk to the camera.
 - NMC(nmc: str, timeout: double, port: int, ip: str, username: str, password: str)
   - Sends a Native Mode Command.  Python and C# only.
+- GetStartupJob()
+  - Returns the current startup job.
+- SetStartupJob(jobName: str)
+  - Sets a job as the startup job. 
 
 ## Camera Events
 ```bash
