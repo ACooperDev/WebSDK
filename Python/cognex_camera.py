@@ -42,6 +42,7 @@ class CogSocket:
             if self.onclose:
                 self.onclose()
 
+    # Handle message responses.
     async def _handle_message(self, message):
         if self.log:
             self.log(f"Received: {message}")
