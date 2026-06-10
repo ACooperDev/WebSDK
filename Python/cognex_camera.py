@@ -19,6 +19,7 @@ class CogSocket:
         self.onerror = None
         self.onclose = None
 
+    # Connect to a URI.
     async def connect(self):
         try:
             self.websocket = await websockets.connect(self.uri)
@@ -30,6 +31,7 @@ class CogSocket:
                 self.onerror()
             raise
 
+    # Listen for messages.
     async def _listen(self):
         try:
             async for message in self.websocket:
@@ -38,6 +40,7 @@ class CogSocket:
             if self.onclose:
                 self.onclose()
 
+    # I don't think I actually need this. ------------------------------------------------------------------------------------
     async def _handle_message(self, message):
         if self.log:
             self.log(f"Received: {message}")
@@ -72,10 +75,12 @@ class CogSocket:
         except json.JSONDecodeError:
             pass
 
+    # Create a unique ID.
     def _next_request_id(self):
         self.request_id = (self.request_id + 1) % 0x7FFFFFFF
         return self.request_id
 
+    # Send a request.
     async def _send_request(self, type_, path, body=None):
         req_id = self._next_request_id()
         future = asyncio.Future()
@@ -93,21 +98,26 @@ class CogSocket:
         await self.websocket.send(json_msg)
         return await future
 
+    # Send a GET request.
     async def get(self, path):
         return await self._send_request('get', path)
 
+    # Send a PUT request.
     async def put(self, path, data):
         return await self._send_request('put', path, data)
 
+    # Send a POST request.
     async def post(self, path, data):
         return await self._send_request('post', path, data)
 
+    # Add message listeners.
     async def add_listener(self, path, listener):
         if path not in self.listeners:
             self.listeners[path] = []
             await self._send_request('listen', path)
         self.listeners[path].append(listener)
 
+    # Remove message listeners.
     async def remove_listener(self, path, listener=None):
         if path in self.listeners:
             if listener:
@@ -122,6 +132,7 @@ class CogSocket:
                 del self.listeners[path]
                 await self._send_request('unlisten', path)
 
+    # Close the connection.
     async def close(self):
         if self.websocket:
             await self.websocket.close()
