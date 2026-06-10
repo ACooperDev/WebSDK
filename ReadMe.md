@@ -125,15 +125,17 @@ var value = await camera.selectedMethod
   - Sets a job as the startup job. 
 
 ## Camera Events
-```bash
+```python
 # Python
 camera.selectedEvent.append(yourCustomMethod)
-
+```
+```javascript
 // JavaScript
 camera.selectedEvent.push(async (state) =>{
   console.log(state);
 });
-
+```
+```csharp
 // C#
 camera.selectedEvent += yourEventHandler;
 ````
