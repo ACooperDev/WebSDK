@@ -69,8 +69,8 @@ const value = await camera.selectedMethod
 await camera.selectedMethod
 // or
 var value = await camera.selectedMethod
-
 ````
+
 - Connect()
   - Connects to the camera and creates a session.   
 - Disconnect()
