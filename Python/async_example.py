@@ -188,6 +188,20 @@ async def main():
         nmcResponse = camera.NMC("GI", 0.250, 23, camera.ip, camera.username, camera.password)
         print(f"NMC Response: {nmcResponse}")
         """
+
+        """
+        # Get startup job
+        print("Getting startup job...")
+        resp = await camera.GetStartupJob()
+        print(f"Startup job: {resp}")
+        """
+        
+        """
+        # Set startup job
+        print("Setting startup job...")
+        await camera.SetStartupJob("aaa.jobx")
+        print("Startup job set.")
+        """
         
     finally:
         # Disconnect
