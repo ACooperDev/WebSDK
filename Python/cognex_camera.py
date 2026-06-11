@@ -432,3 +432,13 @@ class CognexCamera:
         sock.close()   
         
         return response
+
+    # Get the startup job
+    async def GetStartupJob(self):
+        resp = await self.cogsock.get(f"{self.session_id}/startupJob")
+        return json.dumps(resp)
+    
+    # Set the startup job
+    async def SetStartupJob(self, job_name):
+        await self.cogsock.put(f"{self.session_id}/startupJob", job_name)
+        
