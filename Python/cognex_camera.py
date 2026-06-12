@@ -441,4 +441,16 @@ class CognexCamera:
     # Set the startup job
     async def SetStartupJob(self, job_name):
         await self.cogsock.put(f"{self.session_id}/startupJob", job_name)
+
+    # Get all cell names
+    async def GetAllCellNames(self):
+        resp = await self.cogsock.post(f"{self.session_id}/getAllCellNames", "")
+        return json.dumps(resp)
         
+    # Set cell name
+    async def SetCellName(self, cell, name):
+        await self.cogsock.post(f"{self.session_id}/setCellName", [cell, name])
+        
+   # Create new job
+    async def CreateNewJob(self):
+        await self.cogsock.post(f"{self.session_id}/createNewJob", "")   
