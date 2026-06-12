@@ -183,6 +183,12 @@ namespace myConsoleApp
             string result = camera.NMC("GI", 500, 23, camera.RemoteIPAddress, camera.Username, camera.Password);
             Console.WriteLine(result);
             */
+
+            /*
+            Console.WriteLine("Getting startup job");
+            String startupJob = await camera.GetStartupJob() as String;
+            Console.WriteLine(startupJob);
+            */
             
             // Keep console app alive so events can happen
             Console.WriteLine("Press ENTER to exit");
