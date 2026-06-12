@@ -293,9 +293,9 @@ async def main():
         while True:
             async with state_lock:
                 
-                if state.settings_changed:
-                    # print("MAIN saw settings change:", state.last_settings_result)
-                    state.settings_changed = False
+                if state.state_changed:
+                    # print("MAIN saw state change:", state.last_settings_result)
+                    state.last_state = False
 
             # Don't hammer your CPU, a sleep will not miss events, no matter how long it is.
             # All events will be queued and dequeued in order.
