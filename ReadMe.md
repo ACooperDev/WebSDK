@@ -4,7 +4,7 @@ This is an independent project not affiliated with, endorsed by, or supported by
 
 Implementations are in Python, JavaScript, and .NET with the goal of creating a standarized object, cognex_camera, across all three programming languages with a common set of properties, methods, and events.
 
-TODO: continue implementing useful methods.  getStartupJob (do in c#), setStartupJob(do in c#), getAllCellNames, startupOnline, setCellName, setCellConcition, createNewJob
+TODO: continue implementing useful methods.  getStartupJob (do in c#), setStartupJob(do in c#), getAllCellNames(done python), startupOnline, setCellName(done python), setCellConcition, createNewJob(done python)
 
 [Python](#python-overview)
   - Ideal for scripts and automation tasks.
@@ -126,7 +126,13 @@ var value = await camera.selectedMethod
 - GetStartupJob()
   - Returns the current startup job.
 - SetStartupJob(jobName: str)
-  - Sets a job as the startup job. 
+  - Sets a job as the startup job.
+- GetAllCellNames()
+  - Returns all cell names with cell location.   
+- SetCellName(cell: str, name: str)
+  - Sets a cells name.
+- CreateNewJob()
+  - Creates a new job.
 
 ## Camera Events
 ```python
