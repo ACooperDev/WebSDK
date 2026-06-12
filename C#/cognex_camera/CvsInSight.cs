@@ -68,6 +68,7 @@ namespace Cognex.InSight.Web
         private const string _sessionDisposedPath = "sessionDisposed";
         private const string _keepAliveTimeout = "keepAliveTimeout";
         private const string _jobValidationDonePath = "jobValidationDone";
+        private const string _getStartupJob = "startupJob";
         
         // HmiSession Resources:
         private const string _loginPath = "login";
@@ -972,6 +973,16 @@ namespace Cognex.InSight.Web
             await _cogSocket.PostAsync(_sessionIDPath + _readyPath, new object[0]).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<String> GetStartupJob()
+        {
+           var result = await _cogSocket.GetAsync(_sessionIDPath + _getStartupJob).ConfigureAwait(false);
+           return result as String;
+        }
+        
         /// <summary>
         /// Sends a request to manually trigger a new acquisition.
         /// </summary>
