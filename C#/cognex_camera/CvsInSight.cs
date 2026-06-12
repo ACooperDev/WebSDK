@@ -10,6 +10,8 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Net.Sockets;
+using System.Text;
 
 namespace Cognex.InSight.Web
 {
