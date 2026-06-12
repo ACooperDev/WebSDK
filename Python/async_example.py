@@ -202,6 +202,27 @@ async def main():
         await camera.SetStartupJob("aaa.jobx")
         print("Startup job set.")
         """
+
+        '''
+        # Get all cell names
+        print("Getting all cell names...")
+        resp = await camera.GetAllCellNames()
+        print(resp)
+        '''
+        
+        '''
+        # Set cell name
+        print("Setting cell name...")
+        await camera.SetCellName("B16","IWishIWasB15")
+        print("Cell name set.")
+        '''
+        
+        '''
+        # Create new job
+        print("Creating new job...")
+        await camera.CreateNewJob()
+        print("New job created.")
+        '''
         
     finally:
         # Disconnect
