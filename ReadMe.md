@@ -294,7 +294,7 @@ async def main():
             async with state_lock:
                 
                 if state.state_changed:
-                    # print("MAIN saw state change:", state.last_settings_result)
+                    # print("MAIN saw state change:", state.last_state)
                     state.last_state = False
 
             # Don't hammer your CPU, a sleep will not miss events, no matter how long it is.
