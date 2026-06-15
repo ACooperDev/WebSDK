@@ -224,6 +224,20 @@ async def main():
         print("New job created.")
         '''
         
+        """
+        # Set camera to startup online
+        print("Setting camera to startup online...")
+        await camera.StartupOnline()
+        print("Camera set to startup online.")
+        """
+    
+        """
+        # Check startup online status
+        print("Checking startup online status...")
+        resp = await camera.StartupOnlineStatus()
+        print(resp)
+        """
+        
     finally:
         # Disconnect
         print("Disconnecting...")
