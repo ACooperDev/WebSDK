@@ -463,3 +463,8 @@ class CognexCamera:
     async def StartupOnlineStatus(self):
         resp = await self.cogsock.get(f"{self.session_id}/startupOnline")
         return json.dumps(resp)
+
+    # Get cell condition
+    async def GetCellCondition(self, cell):
+        resp = await self.cogsock.post(f"{self.session_id}/getCellCondition", cell)
+        return json.dumps(resp)
