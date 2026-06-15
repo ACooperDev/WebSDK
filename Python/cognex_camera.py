@@ -456,8 +456,8 @@ class CognexCamera:
         await self.cogsock.post(f"{self.session_id}/createNewJob", "")   
 
     # Startup camera online
-    async def StartupOnline(self):
-       await self.cogsock.put(f"{self.session_id}/startupOnline","data")   
+    async def StartupOnline(self, state):
+       await self.cogsock.put(f"{self.session_id}/startupOnline", state)   
        
     # Get startup online status
     async def StartupOnlineStatus(self):
