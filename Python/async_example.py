@@ -227,7 +227,7 @@ async def main():
         """
         # Set camera to startup online
         print("Setting camera to startup online...")
-        await camera.StartupOnline()
+        await camera.StartupOnline(True)
         print("Camera set to startup online.")
         """
     
