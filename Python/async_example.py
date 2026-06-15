@@ -237,6 +237,13 @@ async def main():
         resp = await camera.StartupOnlineStatus()
         print(resp)
         """
+
+        """
+        # Perform some operations with the camera
+        print("Getting cell condition for B16...")
+        resp = await camera.GetCellCondition("B16")
+        print(resp)
+        """
         
     finally:
         # Disconnect
