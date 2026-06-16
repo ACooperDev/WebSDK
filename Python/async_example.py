@@ -245,6 +245,13 @@ async def main():
         print(resp)
         """
         
+        """
+        # Set the condition for a cell
+        print("Setting cell condition")
+        await camera.SetCellCondition("A2", "$B$13")
+        print("Cell condition set")
+        """
+    
     finally:
         # Disconnect
         print("Disconnecting...")
