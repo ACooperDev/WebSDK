@@ -468,3 +468,7 @@ class CognexCamera:
     async def GetCellCondition(self, cell):
         resp = await self.cogsock.post(f"{self.session_id}/getCellCondition", cell)
         return json.dumps(resp)
+
+    # Set cell condition
+    async def SetCellCondition(self, cell, condition):
+        await self.cogsock.post(f"{self.session_id}/setCellCondition", [cell, condition])
