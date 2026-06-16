@@ -141,7 +141,7 @@ var value = await camera.selectedMethod
 - GetCellCondition(cell: str)
   - Gets the condition of a cell.
 - SetCellCondition(cell: str, condition: str)
-  - Sets a cells condition   
+  - Sets a cells condition.   
 
 ## Camera Events
 ```python
