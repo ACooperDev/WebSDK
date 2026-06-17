@@ -16,6 +16,10 @@ TODO: continue implementing useful methods.
 [C# .NET](#net-c-getting-started)
   - Perfect for industrial HMI apps, SCADA, and WinForms/WPF.
 
+# cam_scanner (.py, .js, .cs)
+## A class to discover Cognex devices and device info.
+
+
 # cognex_camera (.py, .js, .cs)
 ## Camera Properties
 ```python
