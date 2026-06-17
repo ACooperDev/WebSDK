@@ -251,6 +251,39 @@ async def main():
         await camera.SetCellCondition("A2", "$B$13")
         print("Cell condition set")
         """
+
+        """
+        # Discover Cognex Device IP/MAC and ISVS Device Details
+        # Create scanner and scan the network.
+        scanner = CogScanner(timeout=15, max_workers=100)
+        results = scanner.scan("192.168.0.0/24", "00:D0:24")
+    
+        # Object to store final results.
+        results_list = []
+    
+        # Process each result.  Attempt to connect to each camera and retrieve its information.
+        for ip, mac in results.items():
+            # print(f"{ip} : {mac}")
+            try:
+                camera = CognexCamera(ip=ip, port=80, username='admin', password='')
+                await camera.Connect()
+                await camera.SendReady()
+                resp = await camera.Info()
+                data = json.loads(resp)
+                results_list.append({"ip": ip,"mac": mac,"model": data.get("model"),"serial": data.get("serial"),"name": data.get("name"), "firmware version": data.get("firmwareVersion"),"error": None})
+                await camera.Disconnect()
+            except Exception as e:
+                # print(f"Error occurred while processing {ip}: {e}")
+                results_list.append({"ip": ip,"mac": mac,"model": None, "serial": None,"name": None,"error": str(e)})
+    
+        # Print a specific cameras results        
+        # print(results_list[0])
+        # Print the IP of the first camera
+        # print(results_list[0]["ip"])
+        # Or loop through all results
+        for result in results_list:
+            print(result)
+        """
     
     finally:
         # Disconnect
