@@ -6,6 +6,7 @@ Implementations are in Python, JavaScript, and .NET with the goal of creating a 
 
 TODO: continue implementing useful methods. 
 - setStartupJob(do in c#), getAllCellNames(done python), setCellName(done python), createNewJob(done python), getCellCondition (done python), startupOnline (get/put done python), setCellConcition (done python)
+- cam_scanner.py TODO .cs, .js
 
 [Python](#python-overview)
   - Ideal for scripts and automation tasks.
@@ -18,7 +19,32 @@ TODO: continue implementing useful methods.
 
 # cam_scanner (.py, .js, .cs)
 ## A class to discover Cognex devices and device info.
+```python
+# Python
+from cam_scanner import CogScanner
 
+scanner = CogScanner(timeout=15, max_workers=100)
+results = scanner.scan("192.168.0.0/24", "00:D0:24")
+
+results_list = []
+
+for ip, mac in results.items():
+    # print(f"{ip} : {mac}")
+    try:
+        camera = CognexCamera(ip=ip, port=80, username='admin', password='')
+        await camera.Connect()
+        await camera.SendReady()
+        resp = await camera.Info()
+        data = json.loads(resp)
+        results_list.append({"ip": ip,"mac": mac,"model": data.get("model"),"serial": data.get("serial"),"name": data.get("name"), "firmware version": data.get("firmwareVersion"),"error": None})
+        await camera.Disconnect()
+    except Exception as e:
+        # print(f"Error occurred while processing {ip}: {e}")
+        results_list.append({"ip": ip,"mac": mac,"model": None, "serial": None,"name": None,"error": str(e)})
+
+for result in results_list:
+    print(result)        
+```
 
 # cognex_camera (.py, .js, .cs)
 ## Camera Properties
