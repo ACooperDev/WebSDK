@@ -501,6 +501,7 @@ from cam_scanner import CogScanner
 
 async def main():
     scanner = CogScanner(timeout=15, max_workers=100)
+    # Ping a range to update your PC ARP cache
     results = scanner.scan("192.168.0.0/24", "00:D0:24")
     
     results_list = []
