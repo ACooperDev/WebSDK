@@ -2,6 +2,7 @@
 import asyncio
 import json
 from cognex_camera import CognexCamera
+from cam_scanner import CogScanner
 
 async def main():
     # Create camera
