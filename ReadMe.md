@@ -19,6 +19,7 @@ TODO: continue implementing useful methods.
 
 [Utilities](#utilities)
   - Useful utilities outside of genreal scope of Rest API Implementation
+    - cam_scanner 
 
 # cognex_camera (.py, .js, .cs)
 ## Camera Properties
