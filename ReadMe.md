@@ -493,6 +493,9 @@ namespace myConsoleApp
 ### Discovers Cognex Device IP's & ISVS Device Details
 ```python
 # Python
+import asyncio
+import json
+from cognex_camera import CognexCamera
 from cam_scanner import CogScanner
 
 scanner = CogScanner(timeout=15, max_workers=100)
