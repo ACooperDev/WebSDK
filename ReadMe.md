@@ -18,7 +18,7 @@ TODO: continue implementing useful methods.
   - Perfect for industrial HMI apps, SCADA, and WinForms/WPF.
 
 # cam_scanner (.py, .js, .cs)
-## A class to discover Cognex devices and device info.
+## Discovers Cognex Devices
 ```python
 # Python
 from cam_scanner import CogScanner
