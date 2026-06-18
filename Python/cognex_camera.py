@@ -301,8 +301,12 @@ class CognexCamera:
     async def ManualAcquire(self):
         await self.cogsock.post(f"{self.session_id}/manualTrigger", "")
 
-    async def SetLiveModeAsync(self, enabled: bool):
+    async def SetLiveMode(self, enabled: bool):
         await self.cogsock.put(f"{self.session_id}/liveMode", enabled)
+        
+    async def GetLiveMode(self):
+        resp = await self.cogsock.get(f"{self.session_id}/liveMode")  
+        return resp
 
     async def ToggleOnlineOffline(self):
         resp = await self.cogsock.get(f"{self.session_id}/softOnline")
