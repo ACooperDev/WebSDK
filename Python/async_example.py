@@ -75,10 +75,10 @@ async def main():
         """
         # Enable/disable live mode
         print("Going live...")
-        await camera.SetLiveModeAsync(True)
+        await camera.SetLiveMode(True)
         print("Live mode enabled.")
         print("Going !live...")
-        await camera.SetLiveModeAsync(False)
+        await camera.SetLiveMode(False)
         print("Live mode disabled.")
         """
         
@@ -284,6 +284,13 @@ async def main():
         # Or loop through all results
         for result in results_list:
             print(result)
+        """
+
+        """
+        # Get live mode
+        print("getting live mode")
+        resp = await camera.GetLiveMode()
+        print(resp)
         """
     
     finally:
