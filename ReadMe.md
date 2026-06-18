@@ -5,7 +5,7 @@ This is an independent project not affiliated with, endorsed by, or supported by
 Implementations are in Python, JavaScript, and .NET with the goal of creating a standarized object, cognex_camera, across all three programming languages with a common set of properties, methods, and events.
 
 TODO: continue implementing useful methods. 
-- setStartupJob(do in c#), getAllCellNames(done python), setCellName(done python), createNewJob(done python), getCellCondition (done python), startupOnline (get/put done python), setCellConcition (done python)
+- setStartupJob(do in c#), getAllCellNames(done python), setCellName(done python), createNewJob(done python), getCellCondition (done python), startupOnline (get/put done python), setCellConcition (done python), getLiveMode (done in python)
 - cam_scanner.py TODO .cs, .js
 
 [Python](#python-overview)
@@ -83,8 +83,10 @@ var value = await camera.selectedMethod
   - Disconnects from the camera and closes the session. 
 - ManualAcquire()
   - Manually triggers an acquisition. 
-- SetLiveModeAsync(bool)
+- SetLiveMode(bool)
   - Enables or disables live mode.
+- GetLiveMode()
+  - Gets the current live mode status.  
 - ToggleOnlineOffline()
   - Toggles to the opposite online state. 
 - QueryCellResults(cell: str)
