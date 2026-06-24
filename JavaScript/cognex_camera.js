@@ -107,7 +107,6 @@ class CogSocket {
                 // Execute all registered listeners for this path
                 for (const listener of listeners) {
                     try {
-                        // In JS, we await coroutines/async functions
                         if (typeof listener.then === 'function') {
                             // Await the asynchronous listener callback
                             listener(...args);
