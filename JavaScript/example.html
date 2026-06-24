@@ -433,6 +433,19 @@
                 console.error('Failed to set startup job:', e); 
             }
             */  
+            
+            /*
+            // Get all cell names
+            if (!camera) return;
+            try {
+                var resp = await camera.GetAllCellNames();
+                console.log('All cell names:', resp);
+                testLabel.textContent = JSON.stringify(resp, null, 2);
+            } catch (e) {
+                console.error('Failed to get all cell names:', e);
+            }
+            */
+            
         }
 
         // HTML document event listeners
