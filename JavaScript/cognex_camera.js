@@ -559,6 +559,10 @@ class CognexCamera {
         const resp = await this.cogsock.post(`${this.sessionId}/getAllCellNames`);
         return JSON.stringify(resp);
     }
-
+    
+    // Set cell name
+    async SetCellName(cell, name) {
+        await this.cogsock.post(`${this.sessionId}/setCellName`, [cell, name]);
+    }
     
 }
