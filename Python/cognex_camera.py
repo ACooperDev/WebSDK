@@ -437,42 +437,33 @@ class CognexCamera:
         
         return response
 
-    # Get the startup job
     async def GetStartupJob(self):
         resp = await self.cogsock.get(f"{self.session_id}/startupJob")
         return json.dumps(resp)
     
-    # Set the startup job
     async def SetStartupJob(self, job_name):
         await self.cogsock.put(f"{self.session_id}/startupJob", job_name)
 
-    # Get all cell names
     async def GetAllCellNames(self):
         resp = await self.cogsock.post(f"{self.session_id}/getAllCellNames", "")
         return json.dumps(resp)
         
-    # Set cell name
     async def SetCellName(self, cell, name):
         await self.cogsock.post(f"{self.session_id}/setCellName", [cell, name])
         
-   # Create new job
     async def CreateNewJob(self):
         await self.cogsock.post(f"{self.session_id}/createNewJob", "")   
 
-    # Startup camera online
     async def StartupOnline(self, state):
        await self.cogsock.put(f"{self.session_id}/startupOnline", state)   
        
-    # Get startup online status
     async def StartupOnlineStatus(self):
         resp = await self.cogsock.get(f"{self.session_id}/startupOnline")
         return json.dumps(resp)
 
-    # Get cell condition
     async def GetCellCondition(self, cell):
         resp = await self.cogsock.post(f"{self.session_id}/getCellCondition", cell)
         return json.dumps(resp)
 
-    # Set cell condition
     async def SetCellCondition(self, cell, condition):
         await self.cogsock.post(f"{self.session_id}/setCellCondition", [cell, condition])
