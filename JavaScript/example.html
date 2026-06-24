@@ -478,7 +478,31 @@
             } catch (e) {
                 console.error('Failed to get cell condition:', e);
             }
-            */            
+            */       
+
+            /*
+            // Set startup online
+            if (!camera) return;
+            try {
+                await camera.StartupOnline(inputValue1);
+                console.log('Startup online set successfully.');
+                testLabel.textContent = 'Startup online set successfully.';
+            } catch (e) {
+                console.error('Failed to set startup online:', e);
+            }
+            */
+            
+            /*
+            // Get startup online status
+            if (!camera) return;
+            try {
+                var resp = await camera.StartupOnlineStatus();
+                console.log('Startup online status:', resp);
+                testLabel.textContent = JSON.stringify(resp, null, 2);
+            } catch (e) {
+                console.error('Failed to get startup online status:', e);
+            }
+            */
             
         }
 
