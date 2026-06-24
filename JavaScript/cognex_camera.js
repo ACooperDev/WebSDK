@@ -578,5 +578,13 @@ class CognexCamera {
         const resp = await this.cogsock.get(`${this.sessionId}/startupOnline`);
         return JSON.stringify(resp);
     }
-    
+
+    async SetCellCondition(cell, condition){
+        await this.cogsock.post(`${this.sessionId}/setCellCondition`, [cell, condition]);
+    }
+
+    async GetLiveMode(){
+        const resp = await this.cogsock.get(`${this.sessionId}/liveMode`);
+        return JSON.stringify(resp);
+    }
 }
