@@ -5,7 +5,7 @@ This is an independent project not affiliated with, endorsed by, or supported by
 Implementations are in Python, JavaScript, and .NET with the goal of creating a standarized object, cognex_camera, across all three programming languages with a common set of properties, methods, and events.
 
 TODO: continue implementing useful methods. 
-- setStartupJob(do c#), getAllCellNames(do c#), setCellName(do c#), createNewJob(done python), getCellCondition (done python), startupOnline (get/put done python), setCellConcition (done python), getLiveMode (done in python)
+- setStartupJob(do c#), getAllCellNames(do c#), setCellName(do c#), createNewJob(do c#), getCellCondition (done python), startupOnline (get/put done python), setCellConcition (done python), getLiveMode (done in python)
 - cam_scanner.py TODO .cs, .js
 
 [Python](#python-overview)
