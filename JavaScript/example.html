@@ -468,6 +468,18 @@
             }
             */
             
+            /*
+            // Get cell condition
+            if (!camera) return;
+            try {
+                var resp = await camera.GetCellCondition(inputValue1);
+                console.log('Cell condition:', resp);
+                testLabel.textContent = JSON.stringify(resp, null, 2);
+            } catch (e) {
+                console.error('Failed to get cell condition:', e);
+            }
+            */            
+            
         }
 
         // HTML document event listeners
