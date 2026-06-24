@@ -543,14 +543,22 @@ class CognexCamera {
         return response.json();
     }
     
-    //Get startup job
+    // Get startup job
     async GetStartupJob() {
         const resp =await this.cogsock.get(`${this.sessionId}/startupJob`);
         return JSON.stringify(resp);
     }
 
-    //Set startup job
+    // Set startup job
     async SetStartupJob(jobName) {
         await this.cogsock.put(`${this.sessionId}/startupJob`, jobName);
     }
+    
+    // Get all cell names
+    async GetAllCellNames() {
+        const resp = await this.cogsock.post(`${this.sessionId}/getAllCellNames`);
+        return JSON.stringify(resp);
+    }
+
+    
 }
