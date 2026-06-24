@@ -570,5 +570,13 @@ class CognexCamera {
         return JSON.stringify(resp);
     }
 
+    async StartupOnline(state){
+        await this.cogsock.put(`${this.sessionId}/startupOnline`, state);
+    }
+
+    async StartupOnlineStatus(){
+        const resp = await this.cogsock.get(`${this.sessionId}/startupOnline`);
+        return JSON.stringify(resp);
+    }
     
 }
