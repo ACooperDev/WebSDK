@@ -565,5 +565,10 @@ class CognexCamera {
         await this.cogsock.post(`${this.sessionId}/createNewJob`, "");
     }
 
+    async GetCellCondition(cell){
+        const resp = await this.cogsock.post(`${this.sessionId}/getCellCondition`, cell);
+        return JSON.stringify(resp);
+    }
+
     
 }
