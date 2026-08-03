@@ -402,40 +402,59 @@ class CognexCamera:
 
     def NMC(self, nmc, timeout, port, ip, username, password):
         sock = socket.create_connection((ip, port))
-        sock.settimeout(timeout)
 
-        # Read initial data
-        data = sock.recv(4096)
-        # print(repr(data.decode('ascii', errors='ignore')))
+        try:
+            # Initial connection timeout
+            sock.settimeout(timeout)
 
-        # Login
-        sock.sendall((username + "\r\n" + password + "\r\n").encode("ascii"))
+            # Read initial data
+            data = sock.recv(4096)
 
-        time.sleep(timeout)
+            # Login
+            sock.sendall((username + "\r\n" + password + "\r\n").encode("ascii"))
 
-        # Read response
-        data = sock.recv(4096)
-        # print(repr(data.decode('ascii', errors='ignore')))
+            # Keep login delay
+            time.sleep(0.250)
 
-        # Send command
-        sock.sendall((nmc + "\r\n").encode("ascii"))
+            # Read login response
+            data = sock.recv(4096)
 
-        time.sleep(timeout)
+            # Send command
+            sock.sendall((nmc + "\r\n").encode("ascii"))
 
-        # Read response
-        response = ""
-        while True:
-            try:
-                data = sock.recv(4096)
-                if not data:
-                    break
-                response += data.decode('ascii', errors='ignore')
-            except socket.timeout:
-                break
-            
-        sock.close()   
-        
-        return response
+            # Now wait for NMC response
+            response = ""
+            received_data = False
+
+            # First response can take up to timeout seconds
+            sock.settimeout(timeout)
+
+            while True:
+                try:
+                    data = sock.recv(4096)
+
+                    if not data:
+                        break
+
+                    response += data.decode('ascii', errors='ignore')
+
+                    # Once data starts arriving, switch to quiet timeout
+                    if not received_data:
+                        received_data = True
+                        sock.settimeout(0.100)
+
+                except socket.timeout:
+                    # If we already received data, quiet period means done
+                    if received_data:
+                        break
+
+                    # No data yet, keep waiting until max timeout
+                    continue
+
+            return response
+
+        finally:
+            sock.close()
 
     async def GetStartupJob(self):
         resp = await self.cogsock.get(f"{self.session_id}/startupJob")
