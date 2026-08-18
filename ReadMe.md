@@ -34,8 +34,7 @@ camera = new CognexCamera(ip, optionalProperties)
 ```
 ```csharp
 // C#
-CvsInSight camera = new CvsInsight();
-camera.Connect(ip, optionalProperties);
+CognexCamera camera = new CognexCamera(ip, optionalProperties)
 ````
 - Required to create a new camera
   - ip (string)
