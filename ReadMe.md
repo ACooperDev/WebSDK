@@ -433,7 +433,6 @@ try
     await camera.SendReady();
 
     var jobInfo = await camera.GetJobInfo();
-    Console.WriteLine("Job Info:");
     Console.WriteLine(jobInfo);
 
     await camera.Disconnect();
