@@ -421,6 +421,8 @@ cognex_camera can be built/modified from [here.](JavaScript/)
 
 CognexCamera.dll can be built from [here](DotNet/CognexCamera/).
 
+Examples can be found [here](DotNet/).
+
 ## .NET C# Getting Started
 ```csharp
 using CognexCameraSdk;
