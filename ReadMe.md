@@ -336,7 +336,7 @@ if __name__ == "__main__":
 - `cognex_camera.js` defines two classes:
   - `CogSocket`
   - `CognexCamera`
-- `example.html` is an example emplementation of `cognex_camera.js`
+- `example.html` is an example implementation of `cognex_camera.js`
 
 cognex_camera can be built/modified from [here.](JavaScript/)
 
@@ -402,22 +402,17 @@ cognex_camera can be built/modified from [here.](JavaScript/)
 </html>
 ```
 # .NET C# Overview
-- `Cognex.InSight.Web.dll` defines two classes:
+- `cognex_camera.cs` defines two classes:
   - `CogSocket`
-  - `CvsInSight`
-- `Program.cs` is an example emplementation of `Cognex.InSight.Web.dll`
+  - `CognexCamera`
+- `example` is a console application example implementation of `cognex_camera.cs`
+- `async_example` is a console application example implementation of `cognex_camera.cs`
+- `CognexCamera` can be compiled to create `CognexCamera.dll`
 
 ## .NET C# Requirements
-.NET Framework or .NET
+.NET 10
 
-Install required packages:
-```bash
-dotnet add package Newtonsoft.Json
-```
-```bash
-dotnet add package WebSocketSharp.Standard --version 1.0.3
-```
-Cognex.InSight.Web.dll can be built/modified from [here](C%23/cognex_camera/) or downloaded directly [here.](C%23/cognex_camera/bin/Debug/net9.0-windows7.0/) 
+CognexCamera.dll can be built from [here](DotNet/CognexCamera/).
 
 ## .NET C# Getting Started
 ```csharp
