@@ -340,7 +340,7 @@ class CognexCamera:
         resp = await self.cogsock.get(f"{self.root}/state")
         return json.dumps(resp)
 
-    async def SetSoftOnlineAsync(self, enabled: bool):
+    async def SetSoftOnline(self, enabled: bool):
         await self.cogsock.put(f"{self.session_id}/softOnline", enabled)
 
     async def GetJobInfo(self):
