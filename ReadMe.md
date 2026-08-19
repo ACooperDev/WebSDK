@@ -443,6 +443,10 @@ catch (Exception ex)
 }
 
 ```
+## .NET Example Event Subscription
+```csharp
+TODO
+```
 
 <br>
 
