@@ -523,8 +523,6 @@ finally
 }
 ```
 
-<br>
-
 # Utilities
 ## cam_scanner (.py, .cs)
 ### Discovers Cognex Device IP's & ISVS Device Details
