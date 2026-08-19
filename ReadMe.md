@@ -9,6 +9,7 @@ TODO:
 - cam_scanner utility in .net
 
 [cognex_camera (.py, .js, .cs)](#cognex_camera-py-js-cs)
+  - Definitions for properties, methods, and events across Python, JavaScript, and .NET Versions of `cognex_camera`
 
 [Python](#python-overview)
   - Ideal for scripts and automation tasks.
