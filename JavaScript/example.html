@@ -221,7 +221,7 @@
             // Enable/disable live mode
             if (!camera) return;
             try {
-                await camera.SetLiveModeAsync(true);
+                await camera.SetLiveMode(true);
                 console.log('Live mode set to:', "True");
                 testLabel.textContent = "True"
             } catch (e) {
@@ -230,7 +230,7 @@
 
             if (!camera) return;
             try {
-                await camera.SetLiveModeAsync(false);
+                await camera.SetLiveMode(false);
                 console.log('Live mode set to:', "False");
                 testLabel.textContent = "False"
             } catch (e) {
@@ -242,7 +242,7 @@
             // Go offline
             if (!camera) return;
             try {
-                await camera.SetSoftOnlineAsync(false);
+                await camera.SetSoftOnline(false);
                 console.log('Camera set to offline mode');
                 testLabel.textContent = "Offline"
             } catch (e) {
@@ -254,7 +254,7 @@
             // Go online
             if (!camera) return;
             try {
-                await camera.SetSoftOnlineAsync(true);
+                await camera.SetSoftOnline(true);
                 console.log('Camera set to online mode');
                 testLabel.textContent = "Online"
             } catch (e) {
