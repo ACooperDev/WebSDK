@@ -8,6 +8,8 @@ TODO:
 - continue implementing missing methods and events. 
 - cam_scanner utility in .net
 
+[cognex_camera (.py, .js, .cs)](./cognex_camera)
+
 [Python](#python-overview)
   - Ideal for scripts and automation tasks.
 
