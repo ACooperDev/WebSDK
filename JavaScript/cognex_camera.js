@@ -413,7 +413,7 @@ class CognexCamera {
         await this.cogsock.post(`${this.sessionId}/manualTrigger`, null);
     }
 
-    async SetLiveModeAsync(enabled) {
+    async SetLiveMode(enabled) {
         await this.cogsock.put(`${this.sessionId}/liveMode`, enabled);
     }
 
