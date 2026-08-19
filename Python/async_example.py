@@ -85,14 +85,14 @@ async def main():
         """
         # Go offline
         print("Going offline...")
-        await camera.SetSoftOnlineAsync(False)
+        await camera.SetSoftOnline(False)
         print("Camera is now offline.")
         """
         
         """
         # Go online
         print("Going online...")
-        await camera.SetSoftOnlineAsync(True)
+        await camera.SetSoftOnline(True)
         print("Camera is now online.")
         """
         
