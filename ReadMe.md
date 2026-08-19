@@ -15,7 +15,7 @@ TODO:
 [JavaScript](#javascript-overview)
   - Optimized for lightweight control panels and dashboards.
 
-[C# .NET](#net-c-getting-started)
+[C# .NET](#net-c-overview)
   - Perfect for industrial HMI apps, SCADA, and WinForms/WPF.
 
 [Utilities](#utilities)
