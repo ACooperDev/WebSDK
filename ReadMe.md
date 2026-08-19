@@ -103,7 +103,7 @@ var value = await camera.selectedMethod
   - Returns info not limited to cameara name, model, firmware, MAC, and serial.
 - FindState()
   - Returns online state for discrete online, ffp online, live mode online, native online, online, and soft online. 
-- SetLiveMode(bool)
+- SetSoftOnlineAsync(bool)
   - Sets soft online to true 
 - GetJobInfo()
   - Returns job information including job name.
