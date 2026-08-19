@@ -1,8 +1,8 @@
 # Cognex REST API Implementations (Unofficial)
 
-This is an independent project not affiliated with, endorsed by, or supported by Cognex Corporation.
+This is an independent project and is not affiliated with, endorsed by, sponsored by, or supported by Cognex Corporation.
 
-Implementations are in Python, JavaScript, and .NET with the goal of creating a standarized object, cognex_camera, across all three programming languages with a common set of properties, methods, and events.
+The implementations are intended for educational purposes and are provided in Python, JavaScript, and .NET. The goal is to provide a standardized cognex_camera object across all three programming languages, with a common set of properties, methods, and events.
 
 TODO: 
 - continue implementing missing methods and events. 
