@@ -162,7 +162,12 @@ camera.selectedEvent.push(async (state) =>{
 ```
 ```csharp
 // C#
-camera.selectedEvent += yourEventHandler;
+camera.selectedEvent += body =>
+{
+    Console.WriteLine($"[selectedEvent] {body?.GetRawText()}");
+    return Task.CompletedTask;
+};
+
 ````
 - StateChanged
   - Fired when the camera state changes. 
