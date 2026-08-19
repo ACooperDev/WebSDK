@@ -457,7 +457,7 @@ class CognexCamera {
         return JSON.stringify(resp);
     }
 
-    async SetSoftOnlineAsync(state) {
+    async SetSoftOnline(state) {
         await this.cogsock.put(`${this.sessionId}/softOnline`, state);
     }
 
