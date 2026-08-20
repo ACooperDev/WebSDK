@@ -288,9 +288,15 @@ async def main():
 
         """
         # Get live mode
-        print("getting live mode")
+        print("Getting live mode")
         resp = await camera.GetLiveMode()
         print(resp)
+        """
+
+        """
+        # Load job
+        print("Loading job")
+        await camera.LoadJobData(r"C:\Users\acooper\Desktop\b.jobx")
         """
     
     finally:
