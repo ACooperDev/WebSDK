@@ -6,6 +6,8 @@ import logging
 import httpx
 import socket
 import time
+import base64
+import os
 
 class CogSocket:
     def __init__(self, websocket_uri, root=None):
@@ -486,3 +488,32 @@ class CognexCamera:
 
     async def SetCellCondition(self, cell, condition):
         await self.cogsock.post(f"{self.session_id}/setCellCondition", [cell, condition])
+
+    async def LoadJobData(self, file_path):
+        with open(file_path, "rb") as file:
+            file_data = file.read()
+
+        hmi_named_content = {
+            "$type": "HmiNamedContent",
+            "name": os.path.basename(file_path),
+            "content": base64.b64encode(file_data).decode("ascii")
+        }
+
+        encoded_bytes = json.dumps(
+            hmi_named_content,
+            separators=(",", ":")
+        ).encode("ascii")
+
+        url = f"http://{self.ip}:80/{self.session_id}/loadJobData"
+
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.post(
+                url,
+                content=encoded_bytes,
+                headers={
+                    "Content-Type": "application/json",
+                    "Content-Length": str(len(encoded_bytes))
+                }
+            )
+
+            response.raise_for_status()
