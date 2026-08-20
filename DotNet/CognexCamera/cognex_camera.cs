@@ -10,10 +10,22 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net.Sockets;
-using System.Text;
+using System.Text.Json.Serialization;
 
 namespace CognexCameraSdk
 {
+    public class HmiNamedContent
+    {
+        [JsonPropertyName("$type")]
+        public string Type { get; set; } = "HmiNamedContent";
+
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = "";
+
+        [JsonPropertyName("content")]
+        public string Content { get; set; } = "";
+    }
+
     public class CogSocket : IAsyncDisposable
     {
         private readonly Uri uri;
@@ -874,6 +886,17 @@ namespace CognexCameraSdk
             return SerializeResponse(resp);            
         }
 
+        public async Task LoadJobData(string filePath)
+        {
+            byte[] fileData = await File.ReadAllBytesAsync(filePath);
 
+            var hmiNamedContent = new HmiNamedContent
+            {
+                Name = Path.GetFileName(filePath),
+                Content = Convert.ToBase64String(fileData)
+            };
+
+            await cogsock!.Post($"{sessionId}/loadJobData", hmiNamedContent);
+        }
     }
 }
