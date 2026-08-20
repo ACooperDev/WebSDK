@@ -586,4 +586,32 @@ class CognexCamera {
         const resp = await this.cogsock.get(`${this.sessionId}/liveMode`);
         return JSON.stringify(resp);
     }
+
+    async LoadJobData(file) {
+        const arrayBuffer = await file.arrayBuffer();
+        const bytes = new Uint8Array(arrayBuffer);
+        let binary = "";
+
+        for (let i = 0; i < bytes.length; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+
+        const hmiNamedContent = {
+            "$type": "HmiNamedContent",
+            "name": file.name,
+            "content": btoa(binary)
+        };
+
+        const body = JSON.stringify(hmiNamedContent);
+        const url = `http://${this.ip}:80/${this.sessionId}/loadJobData`;
+        const response = await fetch(url, {method: "POST",body: body});
+
+        if (!response.ok) {
+            throw new Error(`LoadJobData failed: ${response.status}`);
+        }
+
+        const text = await response.text();
+
+        return text ? JSON.parse(text) : null;
+    }   
 }
