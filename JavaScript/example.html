@@ -28,7 +28,7 @@
         Uncomment the desired method calls in the testButton() function to execute them and see results in the console and label below.
         <br>
         <button id="testBtn">Test Button</button>
-        <label>Test Input 1: <input id="testInput1" type="text"></label> <label>Test Input 2: <input id="testInput2" type="text"></label><input type="file" id="testInput3" accept=".bmp">
+        <label>Test Input 1: <input id="testInput1" type="text"></label> <label>Test Input 2: <input id="testInput2" type="text"></label><input type="file" id="testInput3" accept=".bmp"><input type="file" id="jobFile" accept=".jobx,.job">
         <br>
         <label id="testLabel">Test Label</label>
     </div>
@@ -527,7 +527,27 @@
                 console.error('Failed to get live mode:', e);
             }
             */
-            
+
+            /*
+            // Load job
+            if (!camera) return;
+
+            const file = document.getElementById("jobFile").files[0];
+
+            if (!file) {
+                console.error("Please select a job file.");
+                return;
+            }
+
+            try {
+                const resp = await camera.LoadJobData(file);
+                console.log("Loading:", resp);
+                testLabel.textContent = JSON.stringify(resp, null, 2);
+
+            } catch (e) {
+                console.error("Failed to load job:", e);
+            }
+            */
         }
 
         // HTML document event listeners
