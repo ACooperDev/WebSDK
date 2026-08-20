@@ -85,6 +85,8 @@ try
 
     //await camera.SetCellCondition("A1","0");
 
+    //await camera.LoadJobData(@"C:\Users\acooper\Desktop\b.jobx");
+
     await camera.Disconnect();
 }
 catch (Exception ex)
