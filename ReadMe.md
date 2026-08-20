@@ -150,7 +150,9 @@ var value = await camera.selectedMethod
 - GetCellCondition(cell: str)
   - Gets the condition of a cell.
 - SetCellCondition(cell: str, condition: str)
-  - Sets a cells condition.   
+  - Sets a cells condition.
+- LoadJobData(filePath: str)
+  - Loads a job from the specified path to the camera.  
 
 ## Camera Events
 ```python
