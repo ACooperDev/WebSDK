@@ -5,7 +5,7 @@ This is an independent project and is not affiliated with, endorsed by, sponsore
 The implementations are intended for educational purposes and are provided in Python, JavaScript, and .NET. The goal is to provide a standardized cognex_camera object across all three programming languages, with a common set of properties, methods, and events.
 
 TODO: 
-- continue implementing missing methods and events.
+- Continue implementing methods and events.
   - Endpoints
     - /setCustomViewList
     - /saveJobData
