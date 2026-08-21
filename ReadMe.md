@@ -5,7 +5,15 @@ This is an independent project and is not affiliated with, endorsed by, sponsore
 The implementations are intended for educational purposes and are provided in Python, JavaScript, and .NET. The goal is to provide a standardized cognex_camera object across all three programming languages, with a common set of properties, methods, and events.
 
 TODO: 
-- continue implementing missing methods and events. 
+- continue implementing missing methods and events.
+  - Endpoints
+    - /setCustomViewList
+    - /saveJobData
+    - /currentUser
+    - /settings/userAccessList
+    - /logoff
+    - /settings
+    - cam0/hmi/job/(customViewSettingsList easyView jobImageOrientation name pages)  
 - cam_scanner utility in .net
 
 [cognex_camera (.py, .js, .cs)](#cognex_camera-py-js-cs)
